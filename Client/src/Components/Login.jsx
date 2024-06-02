@@ -1,0 +1,209 @@
+import React, { useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const Login = () => {
+  const [value, setvalue] = useState(null);
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setvalue(value);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (value === null) {
+      alert("Please verify captcha");
+      return;
+    }
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URI}/Login`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "api-key": process.env.REACT_APP_API_KEY,
+          },
+        }
+      );
+
+      const responseData = response.data;
+      if (responseData.message === "success") {
+        Cookies.set("email", responseData.email, { expires: 2 });
+        Cookies.set("login", true, { expires: 2 });
+
+        Cookies.set("token", responseData.token, { expires: 2 });
+        if (responseData.role === 1) {
+          Cookies.set("role", "Admin", { expires: 2 });
+          window.location.href = `/`;
+        } else {
+          Cookies.set("role", "User", { expires: 2 });
+          window.location.href = `/`;
+        }
+      } else if (responseData.message === "invalid") {
+        alert("INVALID USERNAME OR PASSWORD");
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
+  return (
+    <div
+      style={{
+        background: "linear-gradient(to right, #000000, #180034)",
+        // display: 'flex',
+        overflow: "hidden",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh", // Ensures the background covers the entire viewport height
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingTop: "80px",
+        }}
+      >
+        <img
+          src="./assets/logo.png"
+          style={{ width: "70px", height: "auto" }}
+          alt=""
+        />
+      </div>
+
+      <h1 style={{ color: "#fff", marginTop: "20px" }}> Login</h1>
+      <div
+        class="row"
+        style={{
+          marginLeft: "0px",
+          marginRight: "0px",
+          marginTop: "20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: "60px",
+        }}
+      >
+        <form
+          action="#"
+          class="contact_form"
+          id="contact_form"
+          onSubmit={handleSubmit}
+        >
+          <div class="col-lg-3 col-md-6 mx-auto text-left">
+            <input
+              type="text"
+              placeholder="Username"
+              name="Username"
+              required
+              style={{
+                backgroundColor: "#202020",
+                textAlign: "center",
+                color: "#fff",
+                width: "100%",
+                padding: "10px",
+                marginTop: "15px",
+                borderRadius: "30px",
+              }}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="Password"
+              required
+              style={{
+                backgroundColor: "#202020",
+                textAlign: "center",
+                color: "#fff",
+                width: "100%",
+                padding: "10px",
+                marginTop: "15px",
+                borderRadius: "30px",
+              }}
+            />
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ReCAPTCHA
+                sitekey="6LcgPdkpAAAAAPoqLs3v2M3AMayB3tK3RdBS7L_L"
+                onChange={onChange}
+                style={{ background: "none", marginTop: "20px", width: "100%" }}
+              />
+            </div>
+
+            <button
+              type="submit"
+              style={{
+                width: "100%",
+                borderRadius: "30px",
+                backgroundColor: "#202020",
+                color: "#fff",
+                fontSize: "16px",
+                fontWeight: "bold",
+                padding: "10px",
+                border: "none",
+                position: "relative",
+                overflow: "hidden",
+                backgroundImage: "linear-gradient(to right, #c43b7d, #8d1182)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "20px",
+              }}
+            >
+              Login
+              <span
+                style={{
+                  position: "absolute",
+                  width: "99%",
+                  height: "93%",
+                  top: "50%",
+                  left: "50%",
+                  padding: "10px",
+                  paddingTop: "7px",
+                  transform: "translate(-50%, -50%)",
+                  borderRadius: "30px",
+                  zIndex: 10,
+                  background: "#202020",
+                  pointerEvents: "none", // Make sure the span doesn't interfere with button clicks
+                }}
+              >
+                Login
+              </span>
+            </button>
+
+            <div style={{ textAlign: "center" }}>
+              <a
+                href="/SignUp"
+                style={{
+                  color: "#fff",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+              >
+                Create an account
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
