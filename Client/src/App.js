@@ -16,29 +16,26 @@ import UsersList from "./Components/UsersList";
 import EditUser from "./Components/EditUser";
 import AdminWithdraw from "./Components/AdminWithdraw";
 import CryptoAddy from "./Components/CryptoAddy";
+import PrivateRoute from "./Components/PrivateRoute";
 function App() {
   return (
     <div className="App">
       <Switch>
-        {Cookies.get("login") ? ((Cookies.get("role") === 'User')?(
-          <Route exact path="/" component={HomeLogin} />
-        ):(
-          <Route exact path="/" component={AdminPanel} />
-        )):(<Route exact path="/" component={Home} />)}
-        
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Login" component={Login} />
-        <Route exact path="/HomeLogin" component={HomeLogin} />
-        <Route exact path="/Deposite" component={Deposite} />
-        <Route exact path="/Withdraw" component={Withdraw} />
-        <Route exact path="/Bot" component={Bot} />
         <Route exact path="/AboutUs" component={AboutUs} />
-        <Route exact path="/CashOut" component={CashOut} />
         <Route exact path="/Faq" component={Faq} />
-        <Route exact path="/UsersList" component={UsersList} />
-        <Route exact path="/EditUser" component={EditUser} />
-        <Route exact path="/AdminWithdraw" component={AdminWithdraw} />
-        <Route exact path="/CryptoAddy" component={CryptoAddy} />
+
+        <PrivateRoute exact path="/" component={Cookies.get("role") === "User" ? HomeLogin : AdminPanel} />
+        <PrivateRoute exact path="/HomeLogin" component={HomeLogin} />
+        <PrivateRoute exact path="/Deposite" component={Deposite} />
+        <PrivateRoute exact path="/Withdraw" component={Withdraw} />
+        <PrivateRoute exact path="/Bot" component={Bot} />
+        <PrivateRoute exact path="/CashOut" component={CashOut} />
+        <PrivateRoute exact path="/UsersList" component={UsersList} />
+        <PrivateRoute exact path="/EditUser" component={EditUser} />
+        <PrivateRoute exact path="/AdminWithdraw" component={AdminWithdraw} />
+        <PrivateRoute exact path="/CryptoAddy" component={CryptoAddy} />
       </Switch>
     </div>
   );

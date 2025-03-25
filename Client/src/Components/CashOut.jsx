@@ -24,6 +24,7 @@ const CashOut = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}` 
         },
       }
     )
@@ -56,6 +57,7 @@ const CashOut = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}` 
         },
       }
     )
@@ -110,6 +112,7 @@ const CashOut = () => {
           headers: {
             "Content-Type": "application/json",
             "api-key": process.env.REACT_APP_API_KEY,
+            "Authorization": `Bearer ${Cookies.get("token")}`
           },
         }
       );

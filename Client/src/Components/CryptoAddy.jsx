@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
+
 const CryptoAddy = () => {
   const [Ethereum, setEthereum] = useState("");
   const [BTC, setBTC] = useState("");
@@ -26,6 +28,7 @@ const CryptoAddy = () => {
           headers: {
             "Content-Type": "application/json",
             "api-key": process.env.REACT_APP_API_KEY,
+            "Authorization": `Bearer ${Cookies.get("token")}`
           },
         }
       );
@@ -48,6 +51,7 @@ const CryptoAddy = () => {
       method: "GET",
       headers: {
         "api-key": process.env.REACT_APP_API_KEY,
+        "Authorization": `Bearer ${Cookies.get("token")}`
       },
     })
       .then((response) => {

@@ -1,22 +1,21 @@
 const jwt = require('jsonwebtoken');
 
 function validateToken(req, res, next) {
-    var token = req.headers.authorization;
-    console.log(token);
-
-    if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).json({ message: "No token provided" });
     }
+    const token = authHeader.split(" ")[1]; 
 
     jwt.verify(token, '123456asdfghjkljasjdhgasdyt6rt2376tuasgd', (err, decoded) => {
         if (err) {
-            return res.status(403).json({ message: 'failed' });
-        } else {
-            return res.status(200).json({ message: 'succeed' });
+            return res.status(403).json({ message: 'Invalid token' });
         }
+
+        req.user = decoded; 
+        next(); 
     });
 }
-
 function requireRoles(roles) {
     return (req, res, next) => {
         const userRole = req.body.role;

@@ -9,6 +9,7 @@ require("./utils/database");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes");
+const { validateToken } = require("./utils/middleware");
 
 var SignUpRouter = require("./routes/SignUp");
 var LoginRouter = require("./routes/Login");
@@ -29,6 +30,7 @@ var UpdateBalanceRouter = require("./routes/UpdateBalance");
 var GetUserPositionRouter = require("./routes/GetUserPosition");
 var GetCoinRouter = require("./routes/GetCoin");
 var UpdateCoinRouter = require("./routes/UpdateCoin");
+//const adminRoutes = require("./routes/admin");  
 
 const { info } = require("console");
 
@@ -71,24 +73,24 @@ app.use("", usersRouter);
 // Users
 app.use("/SignUp", SignUpRouter);
 app.use("/Login", LoginRouter);
-app.use("/Bot", BotRouter);
-app.use("/GetBotDate", GetBotDateRouter);
-app.use("/GetLatestWithdrawals", GetLatestWithdrawalsRouter);
-app.use("/GetUserData", GetUserDataRouter);
-app.use("/GetAllBots", GetAllBotsRouter);
-app.use("/DeleteBot", DeleteBotRouter);
-app.use("/Withdraw", WithdrawRouter);
-app.use("/GetWithdrawHistory", GetWithdrawHistoryRouter);
-app.use("/GetAdminWithdraw", GetAdminWithdrawRouter);
-app.use("/AddPositions", AddPositionsRouter);
-app.use("/GetPositions", GetPositionsRouter);
-app.use("/DeletePosition", DeletePositionRouter);
-app.use("/GetBalance", GetBalanceRouter);
-app.use("/UpdateBalance", UpdateBalanceRouter);
-app.use("/GetUserPosition", GetUserPositionRouter);
-app.use("/GetCoin", GetCoinRouter);
-app.use("/UpdateCoin", UpdateCoinRouter);
-
+app.use("/Bot", validateToken,BotRouter);
+app.use("/GetBotDate",validateToken, GetBotDateRouter);
+app.use("/GetLatestWithdrawals",validateToken, GetLatestWithdrawalsRouter);
+app.use("/GetUserData",validateToken, GetUserDataRouter);
+app.use("/GetAllBots", validateToken, GetAllBotsRouter);
+app.use("/DeleteBot",validateToken, DeleteBotRouter);
+app.use("/Withdraw",validateToken, WithdrawRouter);
+app.use("/GetWithdrawHistory",validateToken, GetWithdrawHistoryRouter);
+app.use("/GetAdminWithdraw",validateToken, GetAdminWithdrawRouter);
+app.use("/AddPositions", validateToken,AddPositionsRouter);
+app.use("/GetPositions",validateToken, GetPositionsRouter);
+app.use("/DeletePosition",validateToken, DeletePositionRouter);
+app.use("/GetBalance", validateToken,GetBalanceRouter);
+app.use("/UpdateBalance",validateToken, UpdateBalanceRouter);
+app.use("/GetUserPosition", validateToken,GetUserPositionRouter);
+app.use("/GetCoin",validateToken, GetCoinRouter);
+app.use("/UpdateCoin",validateToken, UpdateCoinRouter);
+//app.use("/admin", adminRoutes);  
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -105,10 +107,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-
-
-
 
 const cron = require('node-cron');
 const mysql = require('mysql');
@@ -170,17 +168,12 @@ const removeRowWithMinId = () => {
   });
 };
 
-
-// Schedule the tasks to run after one second
+//Schedule the tasks to run after one second
 cron.schedule('*/5 * * * * *', () => {
     insertRandomData();
     removeRowWithMinId();
     console.log('Tasks executed at:', new Date());
 });
-
-
-
-
 
 
 module.exports = app;
