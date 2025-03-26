@@ -139,7 +139,7 @@ const Login = () => {
               }}
             >
               <ReCAPTCHA
-                sitekey="6LcgPdkpAAAAAPoqLs3v2M3AMayB3tK3RdBS7L_L"
+                sitekey="6Ldc7QArAAAAAF9YypBqrVHoR0h2bBARN5Q-DyP2"
                 onChange={onChange}
                 style={{ background: "none", marginTop: "20px", width: "100%" }}
               />
