@@ -21,12 +21,15 @@ function App() {
   return (
     <div className="App">
       <Switch>
+      {Cookies.get("login") ? ((Cookies.get("role") === 'User')?(
+          <PrivateRoute exact path="/" component={HomeLogin} />
+        ):(
+          <PrivateRoute exact path="/" component={AdminPanel} />
+        )):(<Route exact path="/" component={Home} />)}
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Login" component={Login} />
         <Route exact path="/AboutUs" component={AboutUs} />
         <Route exact path="/Faq" component={Faq} />
-
-        <PrivateRoute exact path="/" component={Cookies.get("role") === "User" ? HomeLogin : AdminPanel} />
         <PrivateRoute exact path="/HomeLogin" component={HomeLogin} />
         <PrivateRoute exact path="/Deposite" component={Deposite} />
         <PrivateRoute exact path="/Withdraw" component={Withdraw} />

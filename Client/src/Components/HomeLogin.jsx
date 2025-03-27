@@ -265,7 +265,7 @@ const HomeLogin = () => {
                     style={{
                       height: "70px",
                       width: "85px",
-                      backgroundImage: "url('./Assets/bitcoin.png')",
+                      backgroundImage: "url('./assets/bitcoin.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       transform: "rotate(340deg)",
@@ -380,7 +380,7 @@ const HomeLogin = () => {
                     style={{
                       height: "70px",
                       width: "80px",
-                      backgroundImage: "url('./Assets/bitcoin.png')",
+                      backgroundImage: "url('./assets/bitcoin.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       transform: "rotate(340deg)",
@@ -480,7 +480,7 @@ const HomeLogin = () => {
                     style={{
                       height: "70px",
                       width: "80px",
-                      backgroundImage: "url('./Assets/bitcoin.png')",
+                      backgroundImage: "url('./assets/bitcoin.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       transform: "rotate(340deg)",

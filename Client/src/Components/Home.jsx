@@ -245,7 +245,7 @@ const Home = () => {
                       }}
                     >
                       <img
-                        src="./Assets/search.png"
+                        src="./assets/search.png"
                         alt=""
                         style={{ width: "25px", height: "25px" }}
                       />
@@ -346,7 +346,7 @@ const Home = () => {
                       }}
                     >
                       <img
-                        src="./Assets/chart.png"
+                        src="./assets/chart.png"
                         alt=""
                         style={{ width: "25px", height: "25px" }}
                       />
@@ -448,7 +448,7 @@ const Home = () => {
                       }}
                     >
                       <img
-                        src="./Assets/setting.png"
+                        src="./assets/setting.png"
                         alt=""
                         style={{ width: "25px", height: "25px" }}
                       />
@@ -549,7 +549,7 @@ const Home = () => {
                       }}
                     >
                       <img
-                        src="./Assets/support.png"
+                        src="./assets/support.png"
                         alt=""
                         style={{ width: "25px", height: "25px" }}
                       />

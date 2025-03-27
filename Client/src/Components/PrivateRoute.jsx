@@ -10,7 +10,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         Cookies.get("login") ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/Login" />
+          <Redirect to="/" />
         )
       }
     />
