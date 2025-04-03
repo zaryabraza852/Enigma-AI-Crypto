@@ -27,7 +27,6 @@ const HomeLogin = () => {
       })
       .then((data) => {
         setData(data.data);
-        console.log(data.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -82,7 +81,6 @@ const HomeLogin = () => {
       })
       .then((data) => {
         settableData(data.data);
-        console.log(data.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -271,7 +269,6 @@ const HomeLogin = () => {
                       transform: "rotate(340deg)",
                     }}
                   >
-                    {console.log(data)}
                     {data.map((rowData, index) => (
                       <p
                         style={{

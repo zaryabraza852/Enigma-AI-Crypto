@@ -6,8 +6,11 @@ function GenerateToken(user) {
   const payload = {
     Email: user.Email,
     Id: user.Id,
+    passwordUpdatedAt: user.passwordUpdatedAt,
+    Role: !!user.Role,
   };
-  const token = jwt.sign(payload, "123456asdfghjkljasjdhgasdyt6rt2376tuasgd");
+  const token = jwt.sign(payload, "123456asdfghjkljasjdhgasdyt6rt2376tuasgd",{ expiresIn: "3h" });
+  console.log("Generated Token Payload:", payload);
   return token;
 }
 
@@ -21,27 +24,29 @@ async function Login(req, response) {
 
   connection.query(
     `
-    SELECT Id,Email,Role FROM Users 
+    SELECT Id,Email,Role,passwordUpdatedAt  FROM Users 
     WHERE Username='${Username}' AND Password='${Password}' and Active = true
     `,
     (err, res) => {
-      if (err) throw err;
-      else {
-        if (res.length == 0) {
-          return response.status(200).json({ message: "invalid" });
-        } else {
-          var token = GenerateToken(res);
-          return response.status(200).json({
-            message: "success",
-            email: res[0].Email,
-            role: res[0].Role,
-            token: token,
-          });
-        }
+      if (err) {
+        console.error(err);
+        return response.status(500).json({ message: "Internal Server Error" });
       }
+      if (res.length === 0) {
+        return response.status(401).json({ message: "Invalid credentials" });
+      }
+
+      const token = GenerateToken(res[0]);
+      return response.status(200).json({
+        message: "success",
+        email: res[0].Email,
+        role: !!res[0].Role, 
+        token: token,
+      });
     }
   );
 }
+
 
 module.exports = {
   Login,

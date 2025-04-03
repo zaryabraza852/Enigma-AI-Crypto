@@ -16,7 +16,7 @@ const SideBar = () => {
     Cookies.remove("login");
     Cookies.remove("email");
     Cookies.remove("token");
-    window.location.href = "/";
+    window.location.href = "/home";
   }
 
   return (
@@ -29,7 +29,7 @@ const SideBar = () => {
         <a href="javascript:void(0)" className="closebtn" onClick={closeNav}>
           &times;
         </a>
-        <a href="/">Home</a>
+        <a href="/home">Home</a>
         {Cookies.get("login") ? (
           null
         ) : (

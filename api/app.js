@@ -10,6 +10,7 @@ require("./utils/database");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes");
 const { validateToken } = require("./utils/middleware");
+const { authorizeAdmin } = require("./utils/middleware");
 
 var SignUpRouter = require("./routes/SignUp");
 var LoginRouter = require("./routes/Login");
@@ -35,13 +36,15 @@ var UpdateCoinRouter = require("./routes/UpdateCoin");
 const { info } = require("console");
 
 var app = express();
-app.use(cors());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
+app.use(
+    cors({
+        origin: ["http://localhost:3000", "https://enigmabot.cc"], // Allow both local and production frontend
+        methods: ["GET", "POST", "PUT", "DELETE"],
+      allowedHeaders: ["Content-Type", "Authorization","api-key"],
+    })
+  );
+app.options("*", cors()); // Handle preflight requests
+
 
 // function validateAPIKey(req, res, next) {
 //   const authkey =  req.header('api-key');
@@ -78,7 +81,7 @@ app.use("/GetBotDate",validateToken, GetBotDateRouter);
 app.use("/GetLatestWithdrawals",validateToken, GetLatestWithdrawalsRouter);
 app.use("/GetUserData",validateToken, GetUserDataRouter);
 app.use("/GetAllBots", validateToken, GetAllBotsRouter);
-app.use("/DeleteBot",validateToken, DeleteBotRouter);
+app.use("/DeleteBot",validateToken,authorizeAdmin, DeleteBotRouter);
 app.use("/Withdraw",validateToken, WithdrawRouter);
 app.use("/GetWithdrawHistory",validateToken, GetWithdrawHistoryRouter);
 app.use("/GetAdminWithdraw",validateToken, GetAdminWithdrawRouter);
@@ -86,10 +89,10 @@ app.use("/AddPositions", validateToken,AddPositionsRouter);
 app.use("/GetPositions",validateToken, GetPositionsRouter);
 app.use("/DeletePosition",validateToken, DeletePositionRouter);
 app.use("/GetBalance", validateToken,GetBalanceRouter);
-app.use("/UpdateBalance",validateToken, UpdateBalanceRouter);
+app.use("/UpdateBalance",validateToken,authorizeAdmin, UpdateBalanceRouter);
 app.use("/GetUserPosition", validateToken,GetUserPositionRouter);
-app.use("/GetCoin",validateToken, GetCoinRouter);
-app.use("/UpdateCoin",validateToken, UpdateCoinRouter);
+app.use("/GetCoin",validateToken,GetCoinRouter);
+app.use("/UpdateCoin",validateToken,authorizeAdmin, UpdateCoinRouter);
 //app.use("/admin", adminRoutes);  
 
 // catch 404 and forward to error handler
@@ -169,11 +172,11 @@ const removeRowWithMinId = () => {
 };
 
 //Schedule the tasks to run after one second
-cron.schedule('*/5 * * * * *', () => {
-    insertRandomData();
-    removeRowWithMinId();
-    console.log('Tasks executed at:', new Date());
-});
+// cron.schedule('*/5 * * * * *', () => {
+//     insertRandomData();
+//     removeRowWithMinId();
+//     console.log('Tasks executed at:', new Date());
+// });
 
 
 module.exports = app;
