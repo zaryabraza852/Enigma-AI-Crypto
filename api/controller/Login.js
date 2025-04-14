@@ -6,16 +6,18 @@ function GenerateToken(user) {
   const payload = {
     Email: user.Email,
     Id: user.Id,
-    passwordUpdatedAt: user.passwordUpdatedAt,
+    passwordUpdatedAt: user.passwordUpdatedAt || null,
     Role: !!user.Role,
   };
-  const token = jwt.sign(payload, "123456asdfghjkljasjdhgasdyt6rt2376tuasgd",{ expiresIn: "3h" });
+  const token = jwt.sign(payload, "3f6d428c-7f36-487e-832a-f1f88d023a38", {
+    expiresIn: "1h",
+  });
   console.log("Generated Token Payload:", payload);
   return token;
 }
 
 async function Login(req, response) {
-  console.log(req.body.Username,req.body.Password)
+  console.log(req.body.Username, req.body.Password);
   const Username = req.body.Username;
   const Password = crypto
     .createHash("sha256")
@@ -40,13 +42,12 @@ async function Login(req, response) {
       return response.status(200).json({
         message: "success",
         email: res[0].Email,
-        role: !!res[0].Role, 
+        role: !!res[0].Role,
         token: token,
       });
     }
   );
 }
-
 
 module.exports = {
   Login,

@@ -31,20 +31,19 @@ var UpdateBalanceRouter = require("./routes/UpdateBalance");
 var GetUserPositionRouter = require("./routes/GetUserPosition");
 var GetCoinRouter = require("./routes/GetCoin");
 var UpdateCoinRouter = require("./routes/UpdateCoin");
-//const adminRoutes = require("./routes/admin");  
+//const adminRoutes = require("./routes/admin");
 
 const { info } = require("console");
 
 var app = express();
 app.use(
-    cors({
-        origin: ["http://localhost:3000", "https://enigmabot.cc"], // Allow both local and production frontend
-        methods: ["GET", "POST", "PUT", "DELETE"],
-      allowedHeaders: ["Content-Type", "Authorization","api-key"],
-    })
-  );
+  cors({
+    origin: ["http://localhost:3000", "https://enigmabot.cc"], // Allow both local and production frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "api-key"],
+  })
+);
 app.options("*", cors()); // Handle preflight requests
-
 
 // function validateAPIKey(req, res, next) {
 //   const authkey =  req.header('api-key');
@@ -76,24 +75,24 @@ app.use("", usersRouter);
 // Users
 app.use("/SignUp", SignUpRouter);
 app.use("/Login", LoginRouter);
-app.use("/Bot", validateToken,BotRouter);
-app.use("/GetBotDate",validateToken, GetBotDateRouter);
-app.use("/GetLatestWithdrawals",validateToken, GetLatestWithdrawalsRouter);
-app.use("/GetUserData",validateToken, GetUserDataRouter);
+app.use("/Bot", validateToken, BotRouter);
+app.use("/GetBotDate", validateToken, GetBotDateRouter);
+app.use("/GetLatestWithdrawals", validateToken, GetLatestWithdrawalsRouter);
+app.use("/GetUserData", validateToken, GetUserDataRouter);
 app.use("/GetAllBots", validateToken, GetAllBotsRouter);
-app.use("/DeleteBot",validateToken,authorizeAdmin, DeleteBotRouter);
-app.use("/Withdraw",validateToken, WithdrawRouter);
-app.use("/GetWithdrawHistory",validateToken, GetWithdrawHistoryRouter);
-app.use("/GetAdminWithdraw",validateToken, GetAdminWithdrawRouter);
-app.use("/AddPositions", validateToken,AddPositionsRouter);
-app.use("/GetPositions",validateToken, GetPositionsRouter);
-app.use("/DeletePosition",validateToken, DeletePositionRouter);
-app.use("/GetBalance", validateToken,GetBalanceRouter);
-app.use("/UpdateBalance",validateToken,authorizeAdmin, UpdateBalanceRouter);
-app.use("/GetUserPosition", validateToken,GetUserPositionRouter);
-app.use("/GetCoin",validateToken,GetCoinRouter);
-app.use("/UpdateCoin",validateToken,authorizeAdmin, UpdateCoinRouter);
-//app.use("/admin", adminRoutes);  
+app.use("/DeleteBot", validateToken, authorizeAdmin, DeleteBotRouter);
+app.use("/Withdraw", validateToken, WithdrawRouter);
+app.use("/GetWithdrawHistory", validateToken, GetWithdrawHistoryRouter);
+app.use("/GetAdminWithdraw", validateToken, GetAdminWithdrawRouter);
+app.use("/AddPositions", validateToken, AddPositionsRouter);
+app.use("/GetPositions", validateToken, GetPositionsRouter);
+app.use("/DeletePosition", validateToken, DeletePositionRouter);
+app.use("/GetBalance", validateToken, GetBalanceRouter);
+app.use("/UpdateBalance", validateToken, authorizeAdmin, UpdateBalanceRouter);
+app.use("/GetUserPosition", validateToken, GetUserPositionRouter);
+app.use("/GetCoin", validateToken, GetCoinRouter);
+app.use("/UpdateCoin", validateToken, authorizeAdmin, UpdateCoinRouter);
+//app.use("/admin", adminRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -111,72 +110,70 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-const cron = require('node-cron');
-const mysql = require('mysql');
+const cron = require("node-cron");
+const mysql = require("mysql");
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
-    host: process.env.MYSQL_ADDON_HOST,
-    user: process.env.MYSQL_ADDON_USER,
-    password: process.env.MYSQL_ADDON_PASSWORD,
-    database: process.env.MYSQL_ADDON_DB
+  host: process.env.MYSQL_ADDON_HOST,
+  user: process.env.MYSQL_ADDON_USER,
+  password: process.env.MYSQL_ADDON_PASSWORD,
+  database: process.env.MYSQL_ADDON_DB,
 });
 
 // Function to generate random user names with three characters from 'a' to 'z'
 const generateRandomUserName = () => {
-  let prefix = '';
+  let prefix = "";
   for (let i = 0; i < 1; i++) {
-      const randomCharCode = Math.floor(Math.random() * 26) + 97; // Generate a random character code from 'a' to 'z'
-      prefix += String.fromCharCode(randomCharCode); // Convert the character code to a character and append to the prefix
+    const randomCharCode = Math.floor(Math.random() * 26) + 97; // Generate a random character code from 'a' to 'z'
+    prefix += String.fromCharCode(randomCharCode); // Convert the character code to a character and append to the prefix
   }
   const suffix = Math.floor(Math.random() * 10); // Generate a random 4-digit number
   return `${prefix}***${suffix}`; // Combine prefix, asterisks, and suffix
 };
 
-
 // Function to generate random amount
 const generateRandomAmount = () => {
-    const min = 500;
-    const max = 5000;
-    return (Math.random() * (max - min) + min).toFixed(2); // Generate a random amount between 500 and 5000 with 2 decimal places
+  const min = 500;
+  const max = 5000;
+  return (Math.random() * (max - min) + min).toFixed(2); // Generate a random amount between 500 and 5000 with 2 decimal places
 };
-
 
 // Function to insert random data into the temp table
 const insertRandomData = () => {
-    const user = generateRandomUserName();
-    const amount = generateRandomAmount();
+  const user = generateRandomUserName();
+  const amount = generateRandomAmount();
 
-    const sql = 'INSERT INTO Temp (User, Amount) VALUES (?, ?)';
-    const values = [user, amount];
+  const sql = "INSERT INTO Temp (User, Amount) VALUES (?, ?)";
+  const values = [user, amount];
 
-    pool.query(sql, values, (error, results) => {
-        if (error) {
-            console.error('Error inserting data:', error);
-        } else {
-            console.log('Inserted random data successfully:', results.insertId);
-        }
-    });
+  pool.query(sql, values, (error, results) => {
+    if (error) {
+      console.error("Error inserting data:", error);
+    } else {
+      console.log("Inserted random data successfully:", results.insertId);
+    }
+  });
 };
 
 // Function to remove the row with the minimum Id from the temp table
 const removeRowWithMinId = () => {
-  const sql = 'DELETE FROM Temp WHERE Id = (SELECT Id FROM (SELECT MIN(Id) AS Id FROM Temp) AS temp)';
+  const sql =
+    "DELETE FROM Temp WHERE Id = (SELECT Id FROM (SELECT MIN(Id) AS Id FROM Temp) AS temp)";
   pool.query(sql, (error, results) => {
-      if (error) {
-          console.error('Error removing row:', error);
-      } else {
-          console.log('Removed row with minimum Id successfully');
-      }
+    if (error) {
+      console.error("Error removing row:", error);
+    } else {
+      console.log("Removed row with minimum Id successfully");
+    }
   });
 };
 
 //Schedule the tasks to run after one second
-// cron.schedule('*/5 * * * * *', () => {
-//     insertRandomData();
-//     removeRowWithMinId();
-//     console.log('Tasks executed at:', new Date());
-// });
-
+cron.schedule("*/5 * * * * *", () => {
+  insertRandomData();
+  removeRowWithMinId();
+  console.log("Tasks executed at:", new Date());
+});
 
 module.exports = app;
