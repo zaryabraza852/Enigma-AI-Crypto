@@ -1,6 +1,6 @@
 const { connection } = require("../utils/database");
 
-async function   GetAdminWithdraw(req, response) {
+async function GetAdminWithdraw(req, response) {
   try {
     connection.query(
       `SELECT Users.Username as Username, Withdraw.Currency as Currency , Withdraw.Amount as Amounts,
@@ -25,5 +25,5 @@ async function   GetAdminWithdraw(req, response) {
 }
 
 module.exports = {
-    GetAdminWithdraw,
+  GetAdminWithdraw,
 };

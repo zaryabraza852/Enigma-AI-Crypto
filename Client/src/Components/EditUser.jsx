@@ -36,6 +36,7 @@ const EditUser = () => {
           headers: {
             "Content-Type": "application/json",
             "api-key": process.env.REACT_APP_API_KEY,
+            "Authorization": `Bearer ${Cookies.get("token")}` 
           },
         }
       );
@@ -74,6 +75,7 @@ const EditUser = () => {
           headers: {
             "Content-Type": "application/json",
             "api-key": process.env.REACT_APP_API_KEY,
+            "Authorization": `Bearer ${Cookies.get("token")}`
           },
         }
       );
@@ -97,6 +99,7 @@ const EditUser = () => {
         method: "DELETE",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}`
         },
       })
         .then((response) => {
@@ -123,6 +126,7 @@ const EditUser = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}`
         },
       }
     )
@@ -148,6 +152,7 @@ const EditUser = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}`
         },
       }
     )

@@ -13,6 +13,7 @@ const Withdraw = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}` 
         },
       }
     )

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route,Redirect } from "react-router-dom";
 import Home from "./Components/Home";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
@@ -16,29 +16,67 @@ import UsersList from "./Components/UsersList";
 import EditUser from "./Components/EditUser";
 import AdminWithdraw from "./Components/AdminWithdraw";
 import CryptoAddy from "./Components/CryptoAddy";
+import PrivateRoute from "./Components/PrivateRoute";
+import { jwtDecode } from "jwt-decode";
+
 function App() {
+  const token = Cookies.get("token");
+  let isAuthenticated = false;
+  let isAdmin = false;
+
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      isAuthenticated = true;
+      isAdmin = decoded.Role === true; 
+    } catch (error) {
+      isAuthenticated = false;
+    }
+  }
   return (
     <div className="App">
       <Switch>
-        {Cookies.get("login") ? ((Cookies.get("role") === 'User')?(
-          <Route exact path="/" component={HomeLogin} />
+        {/* Redirect users based on their role */}
+      {/* {Cookies.get("login") ? ((Cookies.get("role") === 'User')?(
+          <PrivateRoute exact path="/" component={HomeLogin} />
         ):(
-          <Route exact path="/" component={AdminPanel} />
-        )):(<Route exact path="/" component={Home} />)}
-        
+          <PrivateRoute exact path="/" component={AdminPanel} />
+        )):(<Route exact path="/" component={Home} />)} */}
+
+        {/* Redirect users based on authentication and role */}
+        <Route
+          exact
+          path="/"
+          render={() =>
+            isAuthenticated ? (
+              isAdmin ? <Redirect to="/AdminPanel" /> : <Redirect to="/HomeLogin" />
+            ) : (
+              <Redirect to="/home" />
+            )
+          }
+        />
+
+        {/* Public Routes */}
+        <Route exact path="/home" component={Home} />
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Login" component={Login} />
-        <Route exact path="/HomeLogin" component={HomeLogin} />
-        <Route exact path="/Deposite" component={Deposite} />
-        <Route exact path="/Withdraw" component={Withdraw} />
-        <Route exact path="/Bot" component={Bot} />
         <Route exact path="/AboutUs" component={AboutUs} />
-        <Route exact path="/CashOut" component={CashOut} />
         <Route exact path="/Faq" component={Faq} />
-        <Route exact path="/UsersList" component={UsersList} />
-        <Route exact path="/EditUser" component={EditUser} />
-        <Route exact path="/AdminWithdraw" component={AdminWithdraw} />
-        <Route exact path="/CryptoAddy" component={CryptoAddy} />
+
+          {/* User Routes */}
+        <PrivateRoute exact path="/HomeLogin" component={HomeLogin} />
+        <PrivateRoute exact path="/Deposite" component={Deposite} />
+        <PrivateRoute exact path="/Withdraw" component={Withdraw} />
+        <PrivateRoute exact path="/Bot" component={Bot} />
+        <PrivateRoute exact path="/CashOut" component={CashOut} />
+
+        {/* Admin Routes */}
+        <PrivateRoute exact path="/AdminPanel" component={AdminPanel} adminOnly={true} />
+        <PrivateRoute exact path="/EditUser" component={EditUser} adminOnly={true} />
+        <PrivateRoute exact path="/UsersList" component={UsersList} adminOnly={true} />
+        <PrivateRoute exact path="/AdminWithdraw" component={AdminWithdraw} adminOnly={true} />
+        <PrivateRoute exact path="/CryptoAddy" component={CryptoAddy} adminOnly={true} />
+        
       </Switch>
     </div>
   );

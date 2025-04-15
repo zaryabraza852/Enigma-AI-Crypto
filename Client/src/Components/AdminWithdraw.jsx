@@ -1,5 +1,7 @@
 import React,{useState, useEffect} from "react";
 import FormattedDate from "./FormattedDate";
+import Cookies from "js-cookie";
+
 const AdminWithdraw = () => {
   const [items, setItems] = useState([]);
 
@@ -8,6 +10,7 @@ const AdminWithdraw = () => {
       method: "GET",
       headers: {
         "api-key": process.env.REACT_APP_API_KEY,
+        "Authorization": `Bearer ${Cookies.get("token")}` 
       },
     })
       .then((response) => {

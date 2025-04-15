@@ -14,25 +14,27 @@ async function SignUp(req, response) {
     Username: Username,
     Password: Password,
     Active: true,
+    passwordUpdatedAt: null,
   };
-console.log(data)
-  connection.query(`SELECT * FROM Users WHERE Email='${Email}' or Username='${Username}'`, (err, res) => {
-    if (err) throw err;
-    else {
-      if (res.length == 0) {
-        connection.query("INSERT INTO Users SET ?", data, (err, res) => {
-          if (err) throw err;
-          else {
-            response
-              .status(200)
-              .json({ message: "sent", Email: Email});
-          }
-        });
-      } else {
-        response.status(200).json({ message: "already" });
+  console.log(data);
+  connection.query(
+    `SELECT * FROM Users WHERE Email='${Email}' or Username='${Username}'`,
+    (err, res) => {
+      if (err) throw err;
+      else {
+        if (res.length == 0) {
+          connection.query("INSERT INTO Users SET ?", data, (err, res) => {
+            if (err) throw err;
+            else {
+              response.status(200).json({ message: "sent", Email: Email });
+            }
+          });
+        } else {
+          response.status(200).json({ message: "already" });
+        }
       }
     }
-  });
+  );
 }
 
 module.exports = {

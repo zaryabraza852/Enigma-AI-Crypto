@@ -15,6 +15,7 @@ const HomeLogin = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}`
         },
       }
     )
@@ -26,7 +27,6 @@ const HomeLogin = () => {
       })
       .then((data) => {
         setData(data.data);
-        console.log(data.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -70,6 +70,7 @@ const HomeLogin = () => {
       method: "GET",
       headers: {
         "api-key": process.env.REACT_APP_API_KEY,
+        "Authorization": `Bearer ${Cookies.get("token")}`
       },
     })
       .then((response) => {
@@ -80,7 +81,6 @@ const HomeLogin = () => {
       })
       .then((data) => {
         settableData(data.data);
-        console.log(data.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -263,13 +263,12 @@ const HomeLogin = () => {
                     style={{
                       height: "70px",
                       width: "85px",
-                      backgroundImage: "url('./Assets/bitcoin.png')",
+                      backgroundImage: "url('./assets/bitcoin.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       transform: "rotate(340deg)",
                     }}
                   >
-                    {console.log(data)}
                     {data.map((rowData, index) => (
                       <p
                         style={{
@@ -378,7 +377,7 @@ const HomeLogin = () => {
                     style={{
                       height: "70px",
                       width: "80px",
-                      backgroundImage: "url('./Assets/bitcoin.png')",
+                      backgroundImage: "url('./assets/bitcoin.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       transform: "rotate(340deg)",
@@ -478,7 +477,7 @@ const HomeLogin = () => {
                     style={{
                       height: "70px",
                       width: "80px",
-                      backgroundImage: "url('./Assets/bitcoin.png')",
+                      backgroundImage: "url('./assets/bitcoin.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       transform: "rotate(340deg)",

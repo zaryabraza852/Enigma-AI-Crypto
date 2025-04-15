@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import QRCode from "qrcode.react";
+import Cookies from "js-cookie";
 
 const Deposite = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +43,7 @@ const Deposite = () => {
       method: "GET",
       headers: {
         "api-key": process.env.REACT_APP_API_KEY,
+        "Authorization": `Bearer ${Cookies.get("token")}` 
       },
     })
       .then((response) => {

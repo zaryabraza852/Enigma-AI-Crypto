@@ -20,6 +20,7 @@ const Bot = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}` 
         },
       }
     )
@@ -49,6 +50,7 @@ const Bot = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}`
         },
       }
     )
@@ -113,6 +115,7 @@ const Bot = () => {
               headers: {
                 "Content-Type": "application/json",
                 "api-key": process.env.REACT_APP_API_KEY,
+                "Authorization": `Bearer ${Cookies.get("token")}` 
               },
             }
           );
@@ -144,6 +147,7 @@ const Bot = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}` 
         },
       }
     )

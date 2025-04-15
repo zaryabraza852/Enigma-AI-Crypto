@@ -5,7 +5,10 @@ import SideBar from "./SideBar";
 
 const CashOut = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({ image: "./assets/bitcoin1.png", text: "BTC" });
+  const [selectedItem, setSelectedItem] = useState({
+    image: "./assets/bitcoin1.png",
+    text: "BTC",
+  });
   const [Amount, setAmount] = useState("");
   const [CashoutCredit, setCashoutCredit] = useState(0);
   const [Address, setAddress] = useState("");
@@ -24,6 +27,7 @@ const CashOut = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     )
@@ -56,6 +60,7 @@ const CashOut = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     )
@@ -82,38 +87,42 @@ const CashOut = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("done");
-  
+
     const form = e.target;
-    
+
     // Validation checks
     if (parseFloat(Amount) > CashoutCredit) {
       alert("Error: Withdrawal amount cannot exceed available credit.");
-      return; 
+      return;
     }
 
     if (parseFloat(Amount) < 200) {
       alert("Error: Minimum Withdrawal limit is 200");
-      return; 
+      return;
     }
-  
-    if (!/^[a-zA-Z0-9]{26,999999999999999999999999999999999999}$/.test(Address)) {
+
+    if (
+      !/^[a-zA-Z0-9]{26,999999999999999999999999999999999999}$/.test(Address)
+    ) {
       alert("Error: Invalid withdrawal address.");
       return; // Stop further execution
     }
-  
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URI}/Withdraw?Email=${Cookies.get(
           "email"
         )}&Currency=${selectedItem.text}&Amount=${Amount}&Address=${Address}`,
+        {},
         {
           headers: {
             "Content-Type": "application/json",
             "api-key": process.env.REACT_APP_API_KEY,
+            Authorization: `Bearer ${Cookies.get("token")}`,
           },
         }
       );
-  
+
       setAddress("");
       setAmount("");
       alert("Withdraw Successfully");
@@ -121,10 +130,9 @@ const CashOut = () => {
       GetUserData();
     } catch (error) {
       alert("Error:", error.message);
-      console.log(error.message)
+      console.log(error.message);
     }
   };
-  
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -155,7 +163,7 @@ const CashOut = () => {
         />
       </div> */}
 
-      <SideBar/>
+      <SideBar />
 
       <div
         class="row"
@@ -436,7 +444,11 @@ const CashOut = () => {
               </p>
               <input
                 type="text"
-                placeholder={selectedItem.text === 'BTC'? "Enter your BTC Address":"Enter your Ethereum Address"}
+                placeholder={
+                  selectedItem.text === "BTC"
+                    ? "Enter your BTC Address"
+                    : "Enter your Ethereum Address"
+                }
                 style={{
                   borderRadius: "5px",
                   border: "1px solid #ccc",

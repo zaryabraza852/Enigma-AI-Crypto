@@ -36,6 +36,7 @@ const UsersList = () => {
         method: "DELETE",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
+          "Authorization": `Bearer ${Cookies.get("token")}` 
         },
       })
         .then((response) => {
@@ -76,6 +77,7 @@ const UsersList = () => {
       method: "GET",
       headers: {
         "api-key": process.env.REACT_APP_API_KEY,
+        "Authorization": `Bearer ${Cookies.get("token")}` 
       },
     })
       .then((response) => {
