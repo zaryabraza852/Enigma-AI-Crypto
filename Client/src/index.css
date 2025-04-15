@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* LanguageSelector */
+.dropdown-item-dark {
+  color: #f8f9fa !important;       
+  background-color: transparent;   
+}
+
+.dropdown-item-dark:hover,
+.dropdown-item-dark:focus {
+  background-color: #3d3d3d !important;  
+  color: #ffffff !important;             
+}

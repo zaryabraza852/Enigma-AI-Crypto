@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 const SideBar = () => {
   const [sidenavWidth, setSidenavWidth] = useState(0);
+  const { t } = useTranslation();
 
   const openNav = () => {
     setSidenavWidth(180);
@@ -29,17 +32,17 @@ const SideBar = () => {
         <a href="javascript:void(0)" className="closebtn" onClick={closeNav}>
           &times;
         </a>
-        <a href="/home">Home</a>
+        <a href="/home">{t('home')}</a>
         {Cookies.get("login") ? (
           null
         ) : (
           <a style={{ color: "#fff" }} href="/SignUp">
-            Get Started
+           {t('get_started')}
           </a>
         )}
-        <a href="/Faq">FAQ</a>
-        <a href="/AboutUs">About Us</a>
-        <a href="https://t.me/realrichsociety">Contact Us</a>
+        <a href="/Faq">{t('faq')}</a>
+        <a href="/AboutUs">{t('about_us')}</a>
+        <a href="https://t.me/realrichsociety">{t('contact_us')}</a>
         {Cookies.get("login") ? (
           <a
             style={{ color: "#fff" }}
@@ -47,7 +50,7 @@ const SideBar = () => {
               logout();
             }}
           >
-            Logout
+             {t('logout')}
           </a>
         ) : (
           null
@@ -62,7 +65,9 @@ const SideBar = () => {
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ width: "60px" }}></div>
+          <div style={{ width: "60px" }}>
+          <LanguageSelector />
+          </div>
           <div style={{ marginRight: "auto", marginLeft: "auto" }}>
             <a href="/">
             <img
