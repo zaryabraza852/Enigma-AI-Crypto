@@ -1,56 +1,51 @@
 import React, { useState } from "react";
 import SideBar from "./SideBar";
+import { useTranslation } from "react-i18next";
 
 const Faq = () => {
   const [showText, setShowText] = useState({});
+  const { t } = useTranslation();
 
   const botInfo = [
     {
-      question: "What makes your trading bot different?",
-      answer:
-        "Our bot uses advanced algorithms to consistently generate profits.",
+      question: t("faq_page.q1"),
+      answer: t("faq_page.a1"),
     },
     {
-      question: "How do you ensure security?",
-      answer: "We employ top-level encryption and robust risk management.",
+      question: t("faq_page.q2"),
+      answer: t("faq_page.a2"),
     },
     {
-      question: "Is the investment strategy customizable?",
-      answer:
-        "No, the investment strategy is predefined and optimized for profitability.",
+      question: t("faq_page.q3"),
+      answer: t("faq_page.a3"),
     },
     {
-      question: "How reliable are your profit claims?",
-      answer: "Our profits are verified, and we collect a 5% share.",
+      question: t("faq_page.q4"),
+      answer: t("faq_page.a4"),
     },
     {
-      question: "How does your bot handle market changes?",
-      answer: "Our bot adapts to market volatility effectively.",
+      question: t("faq_page.q5"),
+      answer: t("faq_page.a5"),
     },
     {
-      question: "What support do you offer?",
-      answer: "We provide round-the-clock assistance for setup and queries.",
+      question: t("faq_page.q6"),
+      answer: t("faq_page.a6"),
     },
     {
-      question: "How do I get started?",
-      answer: "Simply sign up, customize, and start trading profitably.",
+      question: t("faq_page.q7"),
+      answer: t("faq_page.a7"),
     },
     {
-      question: "Are there hidden fees",
-      answer: "No, our fee structure is straightforward: 5% of profits.",
+      question: t("faq_page.q8"),
+      answer: t("faq_page.a8"),
     },
     {
-      question: "How do you ensure long-term success?",
-      answer:
-        "Our bot is designed for sustainable profitability with continuous optimization.",
+      question: t("faq_page.q9"),
+      answer: t("faq_page.a9"),
     },
     {
-      question: `How can I be sure that your Enigma robot is the best choice for me?`,
-      answer: `With years of research, development, and rigorous
-      testing in real environments, our Enigma robot is a
-      powerful and reliable tool. With exceptional customer
-      support, we guarantee profits that far exceed market
-      standards.`,
+      question: t("faq_page.q10"),
+      answer: t("faq_page.a10"),
     },
   ];
 
@@ -84,7 +79,7 @@ const Faq = () => {
           alt=""
         />
       </div> */}
-      <SideBar/>
+      <SideBar />
       <div
         class="row"
         style={{
@@ -117,7 +112,7 @@ const Faq = () => {
                 zIndex: 10,
               }}
             >
-              Faq{" "}
+              {t("faq")}{" "}
             </span>
           </h1>
           {botInfo.map((info, index) => (

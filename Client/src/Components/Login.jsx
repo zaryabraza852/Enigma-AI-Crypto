@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const [value, setvalue] = useState(null);
   function onChange(value) {
     console.log("Captcha value:", value);
@@ -28,11 +30,10 @@ const Login = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "api-key": process.env.REACT_APP_API_KEY,           
+            "api-key": process.env.REACT_APP_API_KEY,
           },
         }
       );
-
       const responseData = response.data;
       if (responseData.message === "success") {
         Cookies.set("email", responseData.email, { expires: 2 });
@@ -46,11 +47,18 @@ const Login = () => {
           Cookies.set("role", "User", { expires: 2 });
           window.location.href = `/`;
         }
-      } else if (responseData.message === "invalid") {
+      } else if (responseData.message === "Invalid credentials") {
         alert("INVALID USERNAME OR PASSWORD");
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      if (error.response) {
+        console.log("Error response:", error.response.data); // logs { message: "Invalid credentials" }
+        if (error.response.data.message === "Invalid credentials") {
+          alert("INVALID USERNAME OR PASSWORD");
+        }
+      } else {
+        console.error("Network or unknown error:", error.message);
+      }
     }
   };
 
@@ -80,7 +88,7 @@ const Login = () => {
         />
       </div>
 
-      <h1 style={{ color: "#fff", marginTop: "20px" }}> Login</h1>
+      <h1 style={{ color: "#fff", marginTop: "20px" }}> {t("login")}</h1>
       <div
         class="row"
         style={{
@@ -102,7 +110,7 @@ const Login = () => {
           <div class="col-lg-3 col-md-6 mx-auto text-left">
             <input
               type="text"
-              placeholder="Username"
+              placeholder={t("username")}
               name="Username"
               required
               style={{
@@ -117,7 +125,7 @@ const Login = () => {
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t("password")}
               name="Password"
               required
               style={{
@@ -165,7 +173,7 @@ const Login = () => {
                 marginTop: "20px",
               }}
             >
-              Login
+              {t("login")}
               <span
                 style={{
                   position: "absolute",
@@ -182,7 +190,7 @@ const Login = () => {
                   pointerEvents: "none", // Make sure the span doesn't interfere with button clicks
                 }}
               >
-                Login
+                {t("login")}
               </span>
             </button>
 
@@ -196,7 +204,7 @@ const Login = () => {
                   textDecoration: "none",
                 }}
               >
-                Create an account
+                {t("create")} {t("an")} {t("account")}
               </a>
             </div>
           </div>

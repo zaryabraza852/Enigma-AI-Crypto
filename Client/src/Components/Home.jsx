@@ -1,7 +1,9 @@
 import React from "react";
 import SideBar from "./SideBar";
+import { useTranslation } from "react-i18next";
+
 const Home = () => {
-  
+  const { t } = useTranslation();
   return (
     <div
       style={{
@@ -13,7 +15,7 @@ const Home = () => {
         minHeight: "100vh", // Ensures the background covers the entire viewport height
       }}
     >
-        <SideBar/>
+      <SideBar />
       <h1
         style={{
           fontSize: "36px",
@@ -31,7 +33,7 @@ const Home = () => {
             zIndex: 10,
           }}
         >
-          Welcome{" "}
+          {t("welcome")}{" "}
         </span>
         {/* <br /> */}
         <span
@@ -42,7 +44,7 @@ const Home = () => {
             zIndex: 10,
           }}
         >
-          To The Future{" "}
+          {t("to_the_future")}{" "}
         </span>
         {/* <br /> */}
         <span
@@ -53,7 +55,7 @@ const Home = () => {
             zIndex: 10,
           }}
         >
-          Of Trading
+          {t("of_trading")}
         </span>
       </h1>
 
@@ -61,12 +63,12 @@ const Home = () => {
         style={{
           color: "#8f8f8f",
           fontSize: "13px",
-          marginLeft:'15px',
+          marginLeft: "15px",
           marginRight: "20px",
         }}
       >
-        every seconds you wait{" "}
-        <span style={{ color: "#fff" }}> it costing you money...</span>{" "}
+        {t("wait_cost")}{" "}
+        <span style={{ color: "#fff" }}> {t("cost_money")}...</span>{" "}
       </h6>
 
       <section>
@@ -100,9 +102,11 @@ const Home = () => {
                 alignItems: "center",
                 marginTop: "20px",
               }}
-              onClick={()=>{window.location.href='/SignUp'}}
+              onClick={() => {
+                window.location.href = "/SignUp";
+              }}
             >
-              Get Started
+              {t("get_started")}
               <span
                 style={{
                   position: "absolute",
@@ -118,7 +122,7 @@ const Home = () => {
                   pointerEvents: "none", // Make sure the span doesn't interfere with button clicks
                 }}
               >
-                Get Started
+                {t("get_started")}
               </span>
             </button>
           </div>
@@ -137,9 +141,11 @@ const Home = () => {
                 background: "#202020",
                 marginTop: "20px",
               }}
-              onClick={()=>{window.location.href='https://t.me/realrichsociety'}}
+              onClick={() => {
+                window.location.href = "https://t.me/realrichsociety";
+              }}
             >
-              Telegram canal
+              {t("telegram_channel")}
             </button>
           </div>
           <div class="col-lg-2 col-md-6 mx-auto text-left"></div>
@@ -166,9 +172,12 @@ const Home = () => {
           class="row"
           style={{ marginLeft: "90px", marginRight: "90px", marginTop: "20px" }}
         >
-          <div class="col-lg-11 col-md-6 mx-auto text-center" style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
-            <h3 style={{ color: "#fff" }} >
-              What is{" "}
+          <div
+            class="col-lg-11 col-md-6 mx-auto text-center"
+            style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}
+          >
+            <h3 style={{ color: "#fff" }}>
+              {t("what_is")}{" "}
               <span
                 style={{
                   backgroundImage:
@@ -179,12 +188,15 @@ const Home = () => {
                   zIndex: 10,
                 }}
               >
-                Enigma Ai{" "}
+                {t("enigma_ai")}{" "}
               </span>
             </h3>
           </div>
         </div>
-        <div class="row" style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
+        <div
+          class="row"
+          style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}
+        >
           <div class="col-lg-8 col-md-6 mx-auto text-center">
             <p
               style={{
@@ -197,10 +209,7 @@ const Home = () => {
                 textAlign: "left",
               }}
             >
-              This revolutionary trading AI transcends expectations by
-              harnessing big data for informed decisions and unparalleled
-              precision in transactions thereby redefining the standards of
-              financial excellence.
+              {t("enigma_description")}
             </p>
           </div>
         </div>
@@ -218,7 +227,10 @@ const Home = () => {
         >
           <div class="col-lg-11 col-md-6 mx-auto text-left">
             <div class="row">
-              <div class="col-lg-3 col-md-6 mx-auto text-left" style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
+              <div
+                class="col-lg-3 col-md-6 mx-auto text-left"
+                style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}
+              >
                 <div class="row">
                   <div
                     class="col-lg-11 col-md-6 mx-auto text-left"
@@ -259,7 +271,7 @@ const Home = () => {
                         marginTop: "5px",
                       }}
                     >
-                      Gem Finder
+                      {t("gem_finder")}
                     </p>
                     <p
                       style={{
@@ -279,7 +291,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        Our Al examines the market 24/7 and{" "}
+                        {t("gem_finder_description")}{" "}
                       </span>
                       <span
                         style={{
@@ -290,7 +302,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        determines, with the help of our cutting-{" "}
+                        {t("gem_finder_description_1")}{" "}
                       </span>
                       <span
                         style={{
@@ -301,7 +313,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        edge algorithm, the best crypto gems to{" "}
+                        {t("gem_finder_description_2")}{" "}
                       </span>
                       <span
                         style={{
@@ -312,14 +324,17 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        buy{" "}
+                        {t("to_buy")}{" "}
                       </span>
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-3 col-md-6 mx-auto text-left" style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
+              <div
+                class="col-lg-3 col-md-6 mx-auto text-left"
+                style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}
+              >
                 <div class="row">
                   <div
                     class="col-lg-11 col-md-6 mx-auto text-left"
@@ -360,7 +375,7 @@ const Home = () => {
                         marginTop: "5px",
                       }}
                     >
-                      Advanced Charts Analysis
+                      {t("advanced_charts")}
                     </p>
                     <p
                       style={{
@@ -380,7 +395,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        Our algorithm calculates market{" "}
+                        {t("advanced_charts_description")}{" "}
                       </span>
                       <span
                         style={{
@@ -391,7 +406,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        movements and utilizes advanced{" "}
+                        {t("advanced_charts_description_1")}{" "}
                       </span>
                       <span
                         style={{
@@ -402,7 +417,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        predictive models to anticipate the best{" "}
+                        {t("advanced_charts_description_2")}{" "}
                       </span>
                       <span
                         style={{
@@ -413,30 +428,32 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        possible strategy{" "}
+                        {t("advanced_charts_description_3")}{" "}
                       </span>
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-3 col-md-6 mx-auto text-left" style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
+              <div
+                class="col-lg-3 col-md-6 mx-auto text-left"
+                style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}
+              >
                 <div class="row">
                   <div
                     class="col-lg-11 col-md-6 mx-auto text-left"
                     style={{
-                      height: "220px",
+                      height: "240px",
                       backgroundImage:
                         "linear-gradient(to right, #262630, #28263d)",
                       borderRadius: "40px",
-
-                      margin: "10px",
+                      margin: "1px",
                     }}
                   >
                     <div
                       style={{
                         marginLeft: "15px",
-                        marginTop: "15px",
+                        marginTop: "12px",
                         backgroundImage:
                           "linear-gradient(to right, #373740, #373741)",
                         borderRadius: "15px",
@@ -462,7 +479,7 @@ const Home = () => {
                         marginTop: "5px",
                       }}
                     >
-                      Fully automated trading system
+                      {t("automated_trading")}
                     </p>
                     <p
                       style={{
@@ -482,7 +499,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        The fully automated trading system,{" "}
+                        {t("automated_trading_description")}{" "}
                       </span>
                       <span
                         style={{
@@ -493,7 +510,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        powered by Al, simplifies and accelerates{" "}
+                        {t("automated_trading_description_1")}{" "}
                       </span>
                       <span
                         style={{
@@ -504,7 +521,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        the trading process by eliminating the{" "}
+                        {t("automated_trading_description_2")}{" "}
                       </span>
                       <span
                         style={{
@@ -515,14 +532,17 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        need for human intervention{" "}
+                        {t("automated_trading_description_3")}{" "}
                       </span>
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-3 col-md-6 mx-auto text-left"style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
+              <div
+                class="col-lg-3 col-md-6 mx-auto text-left"
+                style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}
+              >
                 <div class="row">
                   <div
                     class="col-lg-11 col-md-6 mx-auto text-left"
@@ -563,7 +583,7 @@ const Home = () => {
                         marginTop: "5px",
                       }}
                     >
-                      Full support team 24/7
+                      {t("support_team")}
                     </p>
                     <p
                       style={{
@@ -583,7 +603,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        Our team is available 24 hours a day to{" "}
+                        {t("support_team_description")}{" "}
                       </span>
                       <span
                         style={{
@@ -594,7 +614,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        guide you and answer any questions you{" "}
+                        {t("support_team_description_1")}{" "}
                       </span>
                       <span
                         style={{
@@ -605,7 +625,7 @@ const Home = () => {
                           zIndex: 10,
                         }}
                       >
-                        may have{" "}
+                        {t("support_team_description_2")}{" "}
                       </span>
                     </p>
                   </div>
@@ -618,7 +638,7 @@ const Home = () => {
 
       <section>
         <div
-          class="row"
+          className="row"
           style={{
             marginLeft: "10px",
             marginRight: "10px",
@@ -626,7 +646,7 @@ const Home = () => {
             marginBottom: "30px",
           }}
         >
-          <div class="col-lg-11 col-md-6 mx-auto text-left">
+          <div className="col-lg-11 col-md-10 col-sm-12 mx-auto text-left">
             <h1
               style={{
                 color: "#fff",
@@ -634,28 +654,32 @@ const Home = () => {
                 textAlign: "center",
                 marginTop: "20px",
                 marginBottom: "20px",
-                animation: "myAnim 3s linear 0s 1 normal forwards" 
+                animation: "myAnim 3s linear 0s 1 normal forwards",
               }}
             >
-              How To Get Started
+              {t("how_to_get_started")}
             </h1>
-            <div class="row">
-              <div class="col-lg-4 col-md-6 mx-auto text-left" style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
-                <div class="row">
+
+            <div className="row">
+              {[1, 2, 3].map((step, index) => (
+                <div
+                  key={step}
+                  className="col-lg-4 col-md-6 col-sm-12 mb-4"
+                  style={{
+                    animation: "myAnim 3s linear 0s 1 normal forwards",
+                  }}
+                >
                   <div
-                    class="col-lg-11 col-md-6 mx-auto text-left"
+                    className="w-100 h-100"
                     style={{
-                      height: "250px",
                       backgroundImage:
                         "linear-gradient(to right, #262630, #28263d)",
                       borderRadius: "40px",
-                      margin: "10px",
+                      padding: "20px",
                     }}
                   >
                     <div
                       style={{
-                        marginLeft:'15px',
-                        marginTop: "30px",
                         backgroundImage:
                           "linear-gradient(to right, #373740, #373741)",
                         borderRadius: "15px",
@@ -671,179 +695,45 @@ const Home = () => {
                         style={{
                           color: "#fff",
                           fontWeight: "bold",
-                          marginRight: "3px",
                           marginTop: "3px",
                         }}
                       >
-                        1
+                        {step}
                       </h1>
                     </div>
 
                     <p
                       style={{
                         color: "#fff",
-                        marginLeft:'15px',
-                        fontSize: "26px",
+                        fontSize: "22px",
                         fontWeight: "bold",
-                        marginTop: "5px",
+                        marginTop: "15px",
                       }}
                     >
-                      Create an account
+                      {step === 1
+                        ? t("create_account")
+                        : step === 2
+                        ? t("make_deposit")
+                        : t("start_earning")}
                     </p>
+
                     <p
                       style={{
-                        fontSize: "13px",
-                        marginLeft:'15px',
-                        fontWeight: "bold",
-                        marginBottom: "25px",
-                        marginTop: "-10px",
+                        fontSize: "16px",
+                        fontWeight: "500",
+                        marginTop: "10px",
                         color: "#d1d1d4",
-                        fontSize: "20px",
-                        marginRight: "20px",
                       }}
                     >
-                      Create an account on our platform to access our trading
-                      bot and tools
+                      {step === 1
+                        ? t("creat_account_description")
+                        : step === 2
+                        ? t("make_deposit_description")
+                        : t("start_earning_description")}
                     </p>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6 mx-auto text-left" style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
-                <div class="row">
-                  <div
-                    class="col-lg-11 col-md-6 mx-auto text-left"
-                    style={{
-                      height: "250px",
-                      backgroundImage:
-                        "linear-gradient(to right, #262630, #28263d)",
-                      borderRadius: "40px",
-                      margin: "10px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        marginLeft:'15px',
-                        marginTop: "30px",
-                        backgroundImage:
-                          "linear-gradient(to right, #373740, #373741)",
-                        borderRadius: "15px",
-                        width: "50px",
-                        height: "50px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                      }}
-                    >
-                      <h1
-                        style={{
-                          color: "#fff",
-                          fontWeight: "bold",
-                          marginRight: "3px",
-                          marginTop: "3px",
-                        }}
-                      >
-                        2
-                      </h1>
-                    </div>
-
-                    <p
-                      style={{
-                        color: "#fff",
-                        marginLeft:'15px',
-                        fontSize: "26px",
-                        fontWeight: "bold",
-                        marginTop: "5px",
-                      }}
-                    >
-                      Make a deposit
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "13px",
-                        marginLeft:'15px',
-                        fontWeight: "bold",
-                        marginBottom: "25px",
-                        marginTop: "-10px",
-                        color: "#d1d1d4",
-                        fontSize: "20px",
-                        marginRight: "20px",
-                      }}
-                    >
-                      Make your first deposit to start trading
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6 mx-auto text-left" style={{ animation: "myAnim 3s linear 0s 1 normal forwards" }}>
-                <div class="row">
-                  <div
-                    class="col-lg-11 col-md-6 mx-auto text-left"
-                    style={{
-                      height: "250px",
-                      backgroundImage:
-                        "linear-gradient(to right, #262630, #28263d)",
-                      borderRadius: "40px",
-                      margin: "10px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        marginLeft:'15px',
-                        marginTop: "30px",
-                        backgroundImage:
-                          "linear-gradient(to right, #373740, #373741)",
-                        borderRadius: "15px",
-                        width: "50px",
-                        height: "50px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                      }}
-                    >
-                      <h1
-                        style={{
-                          color: "#fff",
-                          fontWeight: "bold",
-                          marginRight: "3px",
-                          marginTop: "3px",
-                        }}
-                      >
-                        3
-                      </h1>
-                    </div>
-
-                    <p
-                      style={{
-                        color: "#fff",
-                        marginLeft:'15px',
-                        fontSize: "26px",
-                        fontWeight: "bold",
-                        marginTop: "5px",
-                      }}
-                    >
-                      Start Earning
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "13px",
-                        marginLeft:'15px',
-                        fontWeight: "bold",
-                        marginBottom: "25px",
-                        marginTop: "-10px",
-                        color: "#d1d1d4",
-                        fontSize: "20px",
-                        marginRight: "20px",
-                      }}
-                    >
-                      Relax and let our bot do all the work for you.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -855,7 +745,7 @@ const Home = () => {
           style={{
             margin: "20px",
             marginTop: "10px",
-            marginBottom:'50px',
+            marginBottom: "50px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -880,9 +770,11 @@ const Home = () => {
                 alignItems: "center",
                 marginTop: "20px",
               }}
-              onClick={()=>{window.location.href='/SignUp'}}
+              onClick={() => {
+                window.location.href = "/SignUp";
+              }}
             >
-              Get Started
+              {t("get_started")}
               <span
                 style={{
                   position: "absolute",
@@ -898,7 +790,7 @@ const Home = () => {
                   pointerEvents: "none", // Make sure the span doesn't interfere with button clicks
                 }}
               >
-                Get Started
+                {t("get_started")}
               </span>
             </button>
           </div>

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import FormattedDate from "./FormattedDate";
 import SideBar from "./SideBar";
+import { useTranslation } from "react-i18next";
 
 const Withdraw = () => {
+  const { t } = useTranslation();
   const [data, setData] = useState([]);
 
   async function GetUserData() {
@@ -13,7 +15,7 @@ const Withdraw = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
-          "Authorization": `Bearer ${Cookies.get("token")}` 
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     )
@@ -100,7 +102,7 @@ const Withdraw = () => {
                   marginTop: "10px",
                 }}
               >
-                Statistics
+                {t("statistics")}
               </span>
             </div>
 
@@ -143,43 +145,43 @@ const Withdraw = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  Joined on <FormattedDate timestamp={rowData.CreatedAt} />
+                  {t("joinedOn")}{" "}
+                  <FormattedDate timestamp={rowData.CreatedAt} />
                 </p>
-              
 
-            <h1
-              style={{
-                color: "#fff",
-                fontWeight: "bold",
-                textAlign: "center",
-                marginTop: "40px",
-              }}
-            >
-              Weekly Profits rate
-            </h1>
+                <h1
+                  style={{
+                    color: "#fff",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginTop: "40px",
+                  }}
+                >
+                  {t("weeklyProfitsRate")}
+                </h1>
 
-            <h4
-              style={{
-                color: "#88f96d",
-                fontWeight: "bold",
-                textAlign: "center",
-                marginTop: "20px",
-              }}
-            >
-              {rowData.ProfitR}$
-            </h4>
-            <h5
-              style={{
-                color: "#88f96d",
-                fontWeight: "bold",
-                textAlign: "center",
-                marginTop: "20px",
-              }}
-            >
-              {rowData.ProfitP}%
-            </h5>
+                <h4
+                  style={{
+                    color: "#88f96d",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  {rowData.ProfitR}$
+                </h4>
+                <h5
+                  style={{
+                    color: "#88f96d",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  {rowData.ProfitP}%
+                </h5>
 
-            {/* <div className="d-flex justify-content-center">
+                {/* <div className="d-flex justify-content-center">
               <div className="col-lg-4 col-md-4 col-sm-4 mx-auto text-center">
                 <h4 style={{ color: "#fff", marginTop: "30px" }}>Day</h4>
                 <h6 style={{ color: "#88f96d" }}>334%</h6>
@@ -194,28 +196,28 @@ const Withdraw = () => {
               </div>
             </div> */}
 
-            <h1
-              style={{
-                color: "#fff",
-                fontWeight: "bold",
-                textAlign: "center",
-                marginTop: "30px",
-              }}
-            >
-              Total Balance
-            </h1>
+                <h1
+                  style={{
+                    color: "#fff",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginTop: "30px",
+                  }}
+                >
+                  {t("totalBalance")}
+                </h1>
 
-            <h4
-              style={{
-                color: "#88f96d",
-                fontWeight: "bold",
-                textAlign: "center",
-                marginTop: "20px",
-              }}
-            >
-              {rowData.BotCredit}$
-            </h4>
-            </div>
+                <h4
+                  style={{
+                    color: "#88f96d",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  {rowData.BotCredit}$
+                </h4>
+              </div>
             ))}
 
             <div
@@ -248,7 +250,7 @@ const Withdraw = () => {
                   window.location.href = "/CashOut";
                 }}
               >
-                Withdraw
+                {t("withdraw")}
                 <span
                   style={{
                     position: "absolute",
@@ -265,7 +267,7 @@ const Withdraw = () => {
                     pointerEvents: "none",
                   }}
                 >
-                  Withdraw
+                  {t("withdraw")}
                 </span>
               </button>
             </div>

@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import SideBar from "./SideBar";
 import axios from "axios";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useTranslation } from 'react-i18next';
+
 const SignUp = () => {
+    const {t} = useTranslation();
   const [value, setvalue] = useState(null);
   function onChange(value) {
     console.log("Captcha value:", value);
@@ -70,7 +73,7 @@ const SignUp = () => {
       }}
     >
       <SideBar />
-      <h1 style={{ color: "#fff", marginTop: "20px" }}> Create my account</h1>
+      <h1 style={{ color: "#fff", marginTop: "20px" }}> {t("create")} {t("my")} {t("account")}</h1>
       <div
         class="row"
         style={{
@@ -92,7 +95,7 @@ const SignUp = () => {
           <div class="col-lg-3 col-md-6 mx-auto text-left">
             <input
               type="email"
-              placeholder="Email"
+              placeholder={t("email")}
               name="Email"
               required
               style={{
@@ -106,7 +109,7 @@ const SignUp = () => {
             />
             <input
               type="text"
-              placeholder="Username"
+              placeholder={t("username")}
               name="Username"
               required
               style={{
@@ -121,7 +124,7 @@ const SignUp = () => {
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t("password")}
               name="Password"
               id="password"
               required
@@ -137,7 +140,7 @@ const SignUp = () => {
             />
             <input
               type="password"
-              placeholder="Confirm Password"
+              placeholder={t("confirm_password")}
               name="Confirm Password"
               id="cpassword"
               required
@@ -187,7 +190,7 @@ const SignUp = () => {
                 marginTop: "20px",
               }}
             >
-              Create my account
+              {t("sign_up")}
               <span
                 style={{
                   position: "absolute",
@@ -204,7 +207,7 @@ const SignUp = () => {
                   pointerEvents: "none", // Make sure the span doesn't interfere with button clicks
                 }}
               >
-                Create my account
+               {t("sign_up")}
               </span>
             </button>
 
@@ -218,7 +221,7 @@ const SignUp = () => {
                   textDecoration: "none",
                 }}
               >
-                Login
+                {t("login")}
               </a>
             </div>
           </div>
