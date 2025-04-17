@@ -736,65 +736,88 @@ const Bot = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    flexWrap: "wrap", // allows wrap if screen is small
+                    gap: "10px", // spacing between left/right items on small screens
                   }}
                 >
-                  <div style={{ textAlign: "left" }}>
+                  {/* Previous Button Section */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      flexWrap: "nowrap",
+                    }}
+                  >
                     <button
                       style={{
-                        width: "30px",
+                        minWidth: "15px",
+                        height: "20px",
                         borderRadius: "50%",
-                        padding: "8px",
+                        padding: "2px",
                         border: "none",
-                        position: "relative",
-                        overflow: "hidden",
                         backgroundColor: "#fff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
-                      onClick={prevPage} // Assuming this should be previousPage instead of nextPage
+                      onClick={prevPage}
                     >
                       <img
-                        src="./assets/left-arrow.png" // Assuming this should be left-arrow.png instead of right-arrow.png
-                        style={{ marginLeft: "auto", marginRight: "auto" }}
+                        src="./assets/left-arrow.png"
                         alt=""
+                        style={{ width: "75%", maxWidth: "16px" }}
                       />
                     </button>
                     <span
                       style={{
-                        marginLeft: "8px",
                         color: "#fff",
-                        fontSize: "12px",
+                        fontSize: "10px",
                         fontWeight: "bold",
+                        whiteSpace: "nowrap",
                       }}
                     >
                       {t("previousPage")}
                     </span>
                   </div>
-                  <div style={{ textAlign: "right" }}>
+
+                  {/* Next Button Section */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      flexWrap: "nowrap",
+                    }}
+                  >
                     <span
                       style={{
-                        marginRight: "10px",
                         color: "#fff",
-                        fontSize: "12px",
+                        fontSize: "10px",
                         fontWeight: "bold",
+                        whiteSpace: "nowrap",
                       }}
                     >
-                      {t("previousPage")}
+                      {t("nextPage")}
                     </span>
                     <button
                       style={{
-                        width: "30px",
+                        minWidth: "15px",
+                        height: "20px",
                         borderRadius: "50%",
-                        padding: "8px",
+                        padding: "2px",
                         border: "none",
-                        position: "relative",
-                        overflow: "hidden",
                         backgroundColor: "#fff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                       onClick={nextPage}
                     >
                       <img
                         src="./assets/right-arrow.png"
-                        style={{ marginLeft: "auto", marginRight: "auto" }}
                         alt=""
+                        style={{ width: "75%", maxWidth: "16px" }}
                       />
                     </button>
                   </div>

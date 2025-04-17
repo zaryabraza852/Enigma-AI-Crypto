@@ -631,7 +631,7 @@ const HomeLogin = () => {
                         fontSize: "12px",
                       }}
                     >
-                      1 day ago
+                      {t("daysAgo")}
                       {/* <TimeAgo timestamp={rowData.CreatedAt} /> */}
                     </td>
                   </tr>

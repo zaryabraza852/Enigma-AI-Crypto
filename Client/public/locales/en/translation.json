@@ -161,5 +161,7 @@
   },
   "enterBTCAddress": "Enter your BTC Address",
   "enterETHAddress": "Enter your Ethereum Address",
-  "enter_amount": "enter amount"
+  "enter_amount": "enter amount",
+
+  "daysAgo": "1 day ago"
 }
