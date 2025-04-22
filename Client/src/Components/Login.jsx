@@ -3,6 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
+import SideBar from "./SideBar";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -73,20 +74,7 @@ const Login = () => {
         minHeight: "100vh", // Ensures the background covers the entire viewport height
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          paddingTop: "80px",
-        }}
-      >
-        <img
-          src="./assets/logo.png"
-          style={{ width: "70px", height: "auto" }}
-          alt=""
-        />
-      </div>
+      <SideBar />
 
       <h1 style={{ color: "#fff", marginTop: "20px" }}> {t("login")}</h1>
       <div

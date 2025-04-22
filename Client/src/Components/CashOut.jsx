@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 const CashOut = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedItem, setSelectedItem] = useState({
     image: "./assets/bitcoin1.png",
     text: "BTC",
@@ -109,7 +111,7 @@ const CashOut = () => {
       alert("Error: Invalid withdrawal address.");
       return; // Stop further execution
     }
-
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URI}/Withdraw?Email=${Cookies.get(
@@ -130,6 +132,7 @@ const CashOut = () => {
       alert("Withdraw Successfully");
       GetWithdrawHistory();
       GetUserData();
+      setIsLoading(false);
     } catch (error) {
       alert("Error:", error.message);
       console.log(error.message);
@@ -468,6 +471,8 @@ const CashOut = () => {
 
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <button
+                  onClick={handleSubmit}
+                  disabled={isLoading}
                   style={{
                     width: "160px",
                     borderRadius: "30px",
@@ -489,7 +494,14 @@ const CashOut = () => {
                     marginBottom: "30px",
                   }}
                 >
-                  {t("withdraw")}
+                  {isLoading ? (
+                    <span
+                      className="spinner"
+                      style={{ fontSize: "12px" }}
+                    ></span>
+                  ) : (
+                    t("withdraw")
+                  )}
                 </button>
               </div>
             </form>
