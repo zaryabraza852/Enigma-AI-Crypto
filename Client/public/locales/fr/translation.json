@@ -1,0 +1,166 @@
+{
+  "home": "Accueil",
+  "faq": "FAQ",
+  "about_us": "À propos de nous",
+  "contact_us": "Contactez-nous",
+  "logout": "Se déconnecter",
+
+  "welcome": "Bienvenue",
+  "to_the_future": "dans le futur",
+  "of_trading": "du trading",
+  "wait_cost": "Chaque seconde que vous attendez,",
+  "cost_money": "cela vous coûte de l'argent...",
+  "get_started": "Commencer",
+
+  "telegram_channel": "Canal Telegram",
+  "what_is": "Qu'est-ce que",
+  "enigma_ai": "Enigma AI",
+  "enigma_description": "Cette intelligence artificielle révolutionnaire dépasse les attentes en exploitant les mégadonnées pour des décisions éclairées et une précision inégalée dans les transactions, redéfinissant ainsi les standards de l'excellence financière.",
+
+  "gem_finder": "Détecteur de pépites",
+  "gem_finder_description": "Notre IA analyse le marché 24h/24 et 7j/7 et",
+  "gem_finder_description_1": "détermine, à l’aide de notre algorithme de pointe,",
+  "gem_finder_description_2": "les meilleures cryptomonnaies",
+  "to_buy": "à acheter",
+
+  "advanced_charts": "Analyse graphique avancée",
+  "advanced_charts_description": "Notre algorithme calcule les",
+  "advanced_charts_description_1": "mouvements du marché et utilise des",
+  "advanced_charts_description_2": "modèles prédictifs avancés pour anticiper",
+  "advanced_charts_description_3": "la meilleure stratégie possible",
+
+  "automated_trading": "Système de trading entièrement automatisé",
+  "automated_trading_description": "Le système de trading entièrement automatisé,",
+  "automated_trading_description_1": "alimenté par l'IA, simplifie et accélère",
+  "automated_trading_description_2": "le processus de trading en éliminant",
+  "automated_trading_description_3": "le besoin d’intervention humaine",
+
+  "support_team": "Équipe d’assistance 24h/24 et 7j/7",
+  "support_team_description": "Notre équipe est disponible 24h/24 pour",
+  "support_team_description_1": "vous guider et répondre à toutes vos questions",
+  "support_team_description_2": "éventuelles",
+
+  "how_to_get_started": "Comment commencer",
+  "create_account": "Créer un compte",
+  "creat_account_description": "Créez un compte sur notre plateforme pour accéder à notre bot et nos outils de trading",
+
+  "make_deposit": "Faire un dépôt",
+  "make_deposit_description": "Effectuez votre premier dépôt pour commencer à trader",
+
+  "start_earning": "Commencer à gagner",
+  "start_earning_description": "Détendez-vous et laissez notre bot faire tout le travail pour vous.",
+
+  "1": "1",
+  "2": "2",
+  "3": "3",
+
+  "create": "Créer",
+  "my": "Mon",
+  "account": "Compte",
+  "an": "un",
+  "confirm_password": "confirmer le mot de passe",
+  "password": "mot de passe",
+  "email": "email",
+  "username": "nom d'utilisateur",
+  "sign_up": "S'inscrire",
+  "login": "Connexion",
+
+  "intro": {
+    "title": "Présentation d'ENIGMA : Révolution de l'IA de Trading",
+    "description": "ENIGMA est le futur du trading. Propulsé par l'apprentissage automatique avancé, il prédit les tendances du marché avec une précision inégalée. Grâce à une prise de décision ultra-rapide et une gestion des risques sophistiquée, ENIGMA surpasse constamment, maximisant les rendements et minimisant les risques. Vivez la révolution avec ENIGMA."
+  },
+  "dashboard": {
+    "balance": "Solde",
+    "statistics": "Statistiques",
+    "bot": "Bot"
+  },
+  "buttons": {
+    "deposit": "Dépôt",
+    "view_stat": "Voir Stat",
+    "start": "Démarrer"
+  },
+  "latest_withdrawals": {
+    "title": "Derniers retraits",
+    "user": "Utilisateur",
+    "amount": "Montant",
+    "time": "Heure"
+  },
+  "deposit": {
+    "min_notice": "Le dépôt minimum est de 200 USD",
+    "address_label": "Votre adresse de dépôt {{token}}",
+    "notice": "Envoyez uniquement du BTC/Ethereum à cette adresse, le dépôt peut prendre jusqu'à 12h pour apparaître"
+  },
+  "currency": {
+    "btc": "BTC"
+  },
+  "instructions": {
+    "title": "Instructions",
+    "send_payment": "Envoyez le paiement à l'adresse ci-dessous",
+    "screenshot": "Prenez une capture d'écran de la transaction et envoyez-la à @realenigma sur Telegram",
+    "wait_credit": "Attendez que les fonds soient crédités sur votre compte"
+  },
+  "telegram": {
+    "link": "Lien Telegram"
+  },
+
+  "statistics": "Statistiques",
+  "joinedOn": "Inscrit le",
+  "weeklyProfitsRate": "Taux de bénéfices hebdomadaire",
+  "totalBalance": "Solde total",
+  "withdraw": "Retirer",
+  "myCredit": "Mon crédit",
+  "addCredits": "Ajouter des crédits",
+  "amountToInvest": "Montant à investir:",
+  "errorInputExceedsLimit": "Erreur : La valeur saisie dépasse la limite.",
+  "errorInputGreaterThan200": "Erreur : La valeur saisie doit être supérieure à 200.",
+  "availableCredit": "Crédit disponible : ${{value}}",
+  "launchBot": "Lancer le bot",
+  "status": "Statut",
+  "active": "Actif",
+  "inactive": "Inactif",
+  "noTrading": "Aucun échange en cours",
+  "position": "Position",
+  "allPricesInUSD": "*Tous les prix sont en USD",
+  "assets": "Actifs",
+  "entryPrice": "Prix d'entrée",
+  "profitsLoss": "Bénéfices/Pertes",
+  "previousPage": "Page précédente",
+  "nextPage": "Page suivante",
+  "size": "Taille",
+
+  "amountToWithdraw": "Montant à retirer",
+  "withdrawTo": "Retirer vers",
+  "withdrawHistory": "Historique des retraits",
+  "withdrawId": "ID de retrait",
+  "aboutUs": "À propos de nous",
+  "aboutUsIntro": "Présentation d'Enigma - un robot de trading exceptionnel développé par notre talentueuse équipe. Dirigée par notre fondateur visionnaire, notre équipe combine expertise en codage, analyse de données et conception UI pour créer un outil révolutionnaire qui domine les marchés financiers. Rejoignez-nous pour façonner l'avenir du trading avec Enigma.",
+  "learnMore": "En savoir plus sur nous",
+
+  "faq_page": {
+    "q1": "Qu'est-ce qui rend votre robot de trading différent ?",
+    "a1": "Notre robot utilise des algorithmes avancés pour générer des profits de manière constante.",
+    "q2": "Comment garantissez-vous la sécurité ?",
+    "a2": "Nous utilisons un chiffrement de haut niveau et une gestion rigoureuse des risques.",
+    "q3": "La stratégie d'investissement est-elle personnalisable ?",
+    "a3": "Non, la stratégie est prédéfinie et optimisée pour la rentabilité.",
+    "q4": "Quelle est la fiabilité de vos affirmations sur les bénéfices ?",
+    "a4": "Nos bénéfices sont vérifiés, et nous prenons une commission de 5%.",
+    "q5": "Comment votre robot réagit-il aux changements de marché ?",
+    "a5": "Notre robot s'adapte efficacement à la volatilité du marché.",
+    "q6": "Quel support offrez-vous ?",
+    "a6": "Nous offrons une assistance 24h/24 pour l'installation et les questions.",
+    "q7": "Comment puis-je commencer ?",
+    "a7": "Inscrivez-vous, personnalisez et commencez à trader avec profit.",
+    "q8": "Y a-t-il des frais cachés",
+    "a8": "Non, notre structure tarifaire est simple : 5% des bénéfices.",
+    "q9": "Comment garantissez-vous un succès à long terme ?",
+    "a9": "Notre robot est conçu pour une rentabilité durable grâce à une optimisation continue.",
+    "q10": "Comment puis-je être sûr que votre robot Enigma est le meilleur choix pour moi ?",
+    "a10": "Grâce à des années de recherche, de développement et de tests rigoureux en conditions réelles, notre robot Enigma est un outil puissant et fiable. Avec un service client exceptionnel, nous garantissons des bénéfices largement supérieurs aux standards du marché."
+  },
+  "enterBTCAddress": "Entrez votre adresse BTC",
+  "enterETHAddress": "Entrez votre adresse Ethereum",
+  "enter_amount": "entrez montant",
+
+  "daysAgo": "il y a 1 jour"
+}

@@ -1,7 +1,10 @@
 import React from "react";
 import SideBar from "./SideBar";
+import { useTranslation } from "react-i18next";
 
 const AboutUs = () => {
+  const { t } = useTranslation();
+
   return (
     <div
       style={{
@@ -61,17 +64,11 @@ const AboutUs = () => {
                 zIndex: 10,
               }}
             >
-              About Us{" "}
+              {t("aboutUs")}{" "}
             </span>
           </h1>
 
-          <h5 style={{ color: "#fff", margin: "20px" }}>
-            Introducing Enigma - an exceptional trading robot developed by our
-            talented team of developers. Led by our visionary founder, our team
-            combines coding expertise. data analysis, and Ul design to create a
-            revolutionary tool that dominates financial markets. Join us as we
-            reshape the future Of trading With Enigma.
-          </h5>
+          <h5 style={{ color: "#fff", margin: "20px" }}>{t("aboutUsIntro")}</h5>
 
           <div
             style={{
@@ -113,7 +110,7 @@ const AboutUs = () => {
               fontSize: "13px",
             }}
           >
-            Learn more about us{" "}
+            {t("learnMore")}{" "}
           </h6>
         </div>
       </div>

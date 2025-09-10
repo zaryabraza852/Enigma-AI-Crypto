@@ -3,10 +3,15 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import QRCode from "qrcode.react";
 import Cookies from "js-cookie";
+import { useTranslation } from "react-i18next";
 
 const Deposite = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({ image: "./assets/bitcoin1.png", text: "BTC" });
+  const [selectedItem, setSelectedItem] = useState({
+    image: "./assets/bitcoin1.png",
+    text: "BTC",
+  });
   const items = [
     { image: "./assets/bitcoin1.png", text: "BTC" },
     { image: "./assets/ethereum.png", text: "Ethereum" },
@@ -18,19 +23,17 @@ const Deposite = () => {
     setIsOpen(false);
   };
 
-  
   useEffect(() => {
     const handleResize = () => {
-        setWindowWidth(window.innerWidth);
+      setWindowWidth(window.innerWidth);
     };
 
     window.addEventListener("resize", handleResize);
 
     return () => {
-        window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResize);
     };
-}, []);
-
+  }, []);
 
   // const value = "https://example.com";
 
@@ -43,7 +46,7 @@ const Deposite = () => {
       method: "GET",
       headers: {
         "api-key": process.env.REACT_APP_API_KEY,
-        "Authorization": `Bearer ${Cookies.get("token")}` 
+        Authorization: `Bearer ${Cookies.get("token")}`,
       },
     })
       .then((response) => {
@@ -109,7 +112,7 @@ const Deposite = () => {
                 textAlign: "left",
               }}
             >
-              The minimum deposit is $200 USD{" "}
+              {t("deposit.min_notice")}
             </span>
           </h6>
 
@@ -200,7 +203,7 @@ const Deposite = () => {
                           display: "inline-block",
                         }}
                       >
-                        BTC
+                        {t("currency.btc")}
                       </span>
                     </div>
                     <img
@@ -276,37 +279,34 @@ const Deposite = () => {
                 marginTop: "20px",
                 fontWeight: "bold",
               }}
+              className="text-center"
             >
-              Your {selectedItem.text} deposit address
+              {t("deposit.address_label", { token: selectedItem.text })}
             </p>
             <div style={{ textAlign: "center" }}>
-            <a
+              <a
                 style={{
-                    background: "#65656b",
-                    padding: "5px",
-                    border: "1px solid #ccc",
-                    borderRadius: "15px",
-                    marginBottom: "10px",
-                    paddingTop: "2px",
-                    paddingBottom: "2px",
-                    color: "#fff",
-                    display: "inline-block",
-                    fontSize: "13px",
-                    marginRight: '10px',
-                    textDecoration: "none", // added to remove underline
-                    width: windowWidth > 1024 ? "300px" : "200px", // Adjust width based on screen width
-                    overflowWrap: "break-word", // allow text to break onto next line if necessary
-                    textAlign: "center" // center the text horizontally
+                  background: "#65656b",
+                  padding: "5px",
+                  border: "1px solid #ccc",
+                  borderRadius: "15px",
+                  marginBottom: "10px",
+                  paddingTop: "2px",
+                  paddingBottom: "2px",
+                  color: "#fff",
+                  display: "inline-block",
+                  fontSize: "13px",
+                  marginRight: "10px",
+                  textDecoration: "none", // added to remove underline
+                  width: windowWidth > 1024 ? "300px" : "200px", // Adjust width based on screen width
+                  overflowWrap: "break-word", // allow text to break onto next line if necessary
+                  textAlign: "center", // center the text horizontally
                 }}
                 // href={IsBTC ? BTC : Ethereum}
-            >
+              >
                 {IsBTC ? BTC : Ethereum}
-            </a>
-        </div>
-
-
-
-
+              </a>
+            </div>
 
             <div
               style={{
@@ -344,8 +344,7 @@ const Deposite = () => {
                   paddingBottom: "50px",
                 }}
               >
-                Only send BTC/Ethereum to this address, deposit can take up to
-                12hr to show up
+                {t("deposit.notice")}
               </p>
             </div>
           </div>
@@ -368,7 +367,7 @@ const Deposite = () => {
                 textAlign: "left",
               }}
             >
-              Instructions{" "}
+              {t("instructions.title")}{" "}
             </span>
           </h6>
 
@@ -414,7 +413,7 @@ const Deposite = () => {
                   fontWeight: "bold",
                 }}
               >
-                Send the payment to the address below
+                {t("instructions.send_payment")}
               </span>
             </div>
 
@@ -449,8 +448,7 @@ const Deposite = () => {
                   fontWeight: "bold",
                 }}
               >
-                Take a screenshot of the transaction and send it to @realenigma on
-                Telegram
+                {t("instructions.screenshot")}
               </span>
             </div>
 
@@ -486,7 +484,7 @@ const Deposite = () => {
                   fontWeight: "bold",
                 }}
               >
-                Wait for the funds to be credited to your account
+                {t("instructions.wait_credit")}
               </span>
             </div>
           </div>
@@ -509,7 +507,7 @@ const Deposite = () => {
                 textAlign: "left",
               }}
             >
-              Telegram Link{" "}
+              {t("telegram.link")}{" "}
             </span>
           </h6>
 

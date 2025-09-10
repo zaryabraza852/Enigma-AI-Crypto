@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import SideBar from "./SideBar";
+import { useTranslation } from "react-i18next";
 
 const CashOut = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedItem, setSelectedItem] = useState({
     image: "./assets/bitcoin1.png",
     text: "BTC",
@@ -107,7 +111,7 @@ const CashOut = () => {
       alert("Error: Invalid withdrawal address.");
       return; // Stop further execution
     }
-
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URI}/Withdraw?Email=${Cookies.get(
@@ -128,6 +132,7 @@ const CashOut = () => {
       alert("Withdraw Successfully");
       GetWithdrawHistory();
       GetUserData();
+      setIsLoading(false);
     } catch (error) {
       alert("Error:", error.message);
       console.log(error.message);
@@ -197,7 +202,7 @@ const CashOut = () => {
                 zIndex: 10,
               }}
             >
-              Withdraw{" "}
+              {t("withdraw")}{" "}
             </span>
           </h1>
 
@@ -225,7 +230,7 @@ const CashOut = () => {
                   marginTop: "2px",
                 }}
               >
-                My Credits
+                {t("myCredit")}
               </h6>
               <span
                 style={{
@@ -335,7 +340,7 @@ const CashOut = () => {
                             display: "inline-block",
                           }}
                         >
-                          BTC
+                          {t("currency.btc")}
                         </span>
                       </div>
                       <img
@@ -409,7 +414,7 @@ const CashOut = () => {
                 }}
               >
                 {" "}
-                Amount to Withdraw
+                {t("amountToWithdraw")}
               </p>
               <input
                 type="text"
@@ -440,14 +445,14 @@ const CashOut = () => {
                 }}
               >
                 {" "}
-                Withdraw to
+                {t("withdrawTo")}
               </p>
               <input
                 type="text"
                 placeholder={
                   selectedItem.text === "BTC"
-                    ? "Enter your BTC Address"
-                    : "Enter your Ethereum Address"
+                    ? t("enterBTCAddress")
+                    : t("enterETHAddress")
                 }
                 style={{
                   borderRadius: "5px",
@@ -466,6 +471,8 @@ const CashOut = () => {
 
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <button
+                  onClick={handleSubmit}
+                  disabled={isLoading}
                   style={{
                     width: "160px",
                     borderRadius: "30px",
@@ -487,7 +494,14 @@ const CashOut = () => {
                     marginBottom: "30px",
                   }}
                 >
-                  Withdraw
+                  {isLoading ? (
+                    <span
+                      className="spinner"
+                      style={{ fontSize: "12px" }}
+                    ></span>
+                  ) : (
+                    t("withdraw")
+                  )}
                 </button>
               </div>
             </form>
@@ -507,7 +521,7 @@ const CashOut = () => {
             <h5
               style={{ color: "#fff", textAlign: "center", marginTop: "10px" }}
             >
-              Withdraws History
+              {t("withdrawHistory")}
             </h5>
 
             <div class="table-responsive" style={{ marginTop: "20px" }}>
@@ -533,7 +547,7 @@ const CashOut = () => {
                         paddingBottom: "0px",
                       }}
                     >
-                      Withdraw ID
+                      {t("withdrawId")}
                     </th>
                     <th
                       scope="col"
@@ -547,7 +561,7 @@ const CashOut = () => {
                         paddingBottom: "0px",
                       }}
                     >
-                      Amount
+                      {t("latest_withdrawals.amount")}
                     </th>
                   </tr>
                 </thead>
@@ -578,7 +592,7 @@ const CashOut = () => {
                           textAlign: "center",
                         }}
                       >
-                        {item.Amount}USD
+                        {item.Amount} USD
                       </td>
                     </tr>
                   ))}

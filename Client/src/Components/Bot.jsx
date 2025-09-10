@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useTranslation } from "react-i18next";
 
 const Bot = () => {
+  const { t } = useTranslation();
   const [value, setvalue] = useState(0);
   const [inputValue, setInputValue] = useState("");
   const [active, setActive] = useState(false);
@@ -20,7 +22,7 @@ const Bot = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
-          "Authorization": `Bearer ${Cookies.get("token")}` 
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     )
@@ -50,7 +52,7 @@ const Bot = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
-          "Authorization": `Bearer ${Cookies.get("token")}`
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     )
@@ -115,7 +117,7 @@ const Bot = () => {
               headers: {
                 "Content-Type": "application/json",
                 "api-key": process.env.REACT_APP_API_KEY,
-                "Authorization": `Bearer ${Cookies.get("token")}` 
+                Authorization: `Bearer ${Cookies.get("token")}`,
               },
             }
           );
@@ -147,7 +149,7 @@ const Bot = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
-          "Authorization": `Bearer ${Cookies.get("token")}` 
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     )
@@ -328,7 +330,7 @@ const Bot = () => {
                   color: "#fff",
                 }}
               >
-                My Credit
+                {t("myCredit")}
               </span>
               <button
                 style={{
@@ -353,7 +355,7 @@ const Bot = () => {
                   window.location.href = "/Deposite";
                 }}
               >
-                Add more credits
+                {t("addCredits")}
               </button>
             </div>
             <h1
@@ -419,7 +421,7 @@ const Bot = () => {
                     zIndex: 10,
                   }}
                 >
-                  Enigma Ai{" "}
+                  {t("enigma_ai")}{" "}
                 </span>
               </h2>
               <div
@@ -439,16 +441,16 @@ const Bot = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  Amount to Invest:
+                  {t("amountToInvest")}
                 </span>
                 <input
                   type="text"
-                  placeholder="Enter Amount"
+                  placeholder={t("enter_amount")}
                   style={{
                     border: "1px solid #a443d2",
                     marginLeft: "5px",
                     fontSize: "11px",
-                    padding: "10px",
+                    padding: "8px",
                     paddingTop: "5px",
                     paddingBottom: "5px",
                     background: "#00000000",
@@ -469,7 +471,7 @@ const Bot = () => {
                     marginBottom: "0px",
                   }}
                 >
-                  Error: Input value exceeds the limit.
+                  {t("errorInputExceedsLimit")}
                 </p>
               )}
               {showError1 && (
@@ -482,7 +484,7 @@ const Bot = () => {
                     marginBottom: "0px",
                   }}
                 >
-                  Error: Input value must greater than 200.
+                  {t("errorInputGreaterThan200")}
                 </p>
               )}
               <p
@@ -494,7 +496,7 @@ const Bot = () => {
                   marginBottom: "0px",
                 }}
               >
-                Available credit : ${value}
+                {t("availableCredit", { value })}
               </p>
               {/* <p
                 id="countdown"
@@ -554,7 +556,7 @@ const Bot = () => {
                       marginTop: "10px",
                     }}
                   >
-                    Launch the bot
+                    {t("launchBot")}
                   </button>
                 )}
               </div>
@@ -568,8 +570,8 @@ const Bot = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    Status:
-                    <span style={{ color: "#0dee4c" }}> Active</span>
+                    {t("status")}:
+                    <span style={{ color: "#0dee4c" }}> {t("active")}</span>
                   </p>
                 ) : (
                   <p
@@ -580,8 +582,8 @@ const Bot = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    Status:
-                    <span style={{ color: "#e40505" }}> Inactive</span>
+                    {t("status")}:
+                    <span style={{ color: "#e40505" }}> {t("inactive")}</span>
                   </p>
                 )}
               </div>
@@ -611,7 +613,7 @@ const Bot = () => {
                 }}
               >
                 <p style={{ fontWeight: "bold", color: "#fff", margin: "0" }}>
-                  No trading going on
+                  {t("noTrading")}
                 </p>
               </div>
             ) : (
@@ -638,7 +640,7 @@ const Bot = () => {
                       border: "1px solid #fff",
                     }}
                   >
-                    Position
+                    {t("position")}
                   </button>
                   <span
                     style={{
@@ -648,7 +650,7 @@ const Bot = () => {
                       color: "#fff",
                     }}
                   >
-                    *All prices are in USD
+                    {t("allPricesInUSD")}
                   </span>
                 </div>
 
@@ -676,7 +678,7 @@ const Bot = () => {
                             fontSize: "12px",
                           }}
                         >
-                          Assets
+                          {t("assets")}
                         </th>
                         <th
                           scope="col"
@@ -691,7 +693,7 @@ const Bot = () => {
                             fontSize: "12px",
                           }}
                         >
-                          Entry Price
+                          {t("entryPrice")}
                         </th>
                         <th
                           scope="col"
@@ -706,7 +708,7 @@ const Bot = () => {
                             fontSize: "12px",
                           }}
                         >
-                          Profits/Loss
+                          {t("profitsLoss")}
                         </th>
                         <th
                           scope="col"
@@ -721,7 +723,7 @@ const Bot = () => {
                             fontSize: "12px",
                           }}
                         >
-                          Size
+                          {t("size")}
                         </th>
                       </tr>
                     </thead>
@@ -734,65 +736,88 @@ const Bot = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    flexWrap: "wrap", // allows wrap if screen is small
+                    gap: "10px", // spacing between left/right items on small screens
                   }}
                 >
-                  <div style={{ textAlign: "left" }}>
+                  {/* Previous Button Section */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      flexWrap: "nowrap",
+                    }}
+                  >
                     <button
                       style={{
-                        width: "30px",
+                        minWidth: "15px",
+                        height: "20px",
                         borderRadius: "50%",
-                        padding: "8px",
+                        padding: "2px",
                         border: "none",
-                        position: "relative",
-                        overflow: "hidden",
                         backgroundColor: "#fff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
-                      onClick={prevPage} // Assuming this should be previousPage instead of nextPage
+                      onClick={prevPage}
                     >
                       <img
-                        src="./assets/left-arrow.png" // Assuming this should be left-arrow.png instead of right-arrow.png
-                        style={{ marginLeft: "auto", marginRight: "auto" }}
+                        src="./assets/left-arrow.png"
                         alt=""
+                        style={{ width: "75%", maxWidth: "16px" }}
                       />
                     </button>
                     <span
                       style={{
-                        marginLeft: "10px",
                         color: "#fff",
-                        fontSize: "12px",
+                        fontSize: "10px",
                         fontWeight: "bold",
+                        whiteSpace: "nowrap",
                       }}
                     >
-                      Previous Page
+                      {t("previousPage")}
                     </span>
                   </div>
-                  <div style={{ textAlign: "right" }}>
+
+                  {/* Next Button Section */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      flexWrap: "nowrap",
+                    }}
+                  >
                     <span
                       style={{
-                        marginRight: "10px",
                         color: "#fff",
-                        fontSize: "12px",
+                        fontSize: "10px",
                         fontWeight: "bold",
+                        whiteSpace: "nowrap",
                       }}
                     >
-                      Next Page
+                      {t("nextPage")}
                     </span>
                     <button
                       style={{
-                        width: "30px",
+                        minWidth: "15px",
+                        height: "20px",
                         borderRadius: "50%",
-                        padding: "8px",
+                        padding: "2px",
                         border: "none",
-                        position: "relative",
-                        overflow: "hidden",
                         backgroundColor: "#fff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                       onClick={nextPage}
                     >
                       <img
                         src="./assets/right-arrow.png"
-                        style={{ marginLeft: "auto", marginRight: "auto" }}
                         alt=""
+                        style={{ width: "75%", maxWidth: "16px" }}
                       />
                     </button>
                   </div>

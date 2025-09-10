@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useTranslation } from "react-i18next";
+import SideBar from "./SideBar";
 
 const Login = () => {
+  const { t } = useTranslation();
   const [value, setvalue] = useState(null);
+  const [loading, setLoading] = useState(false);
   function onChange(value) {
     console.log("Captcha value:", value);
     setvalue(value);
@@ -18,6 +22,7 @@ const Login = () => {
       return;
     }
 
+    setLoading(true);
     const form = e.target;
     const formData = new FormData(form);
 
@@ -28,13 +33,13 @@ const Login = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "api-key": process.env.REACT_APP_API_KEY,           
+            "api-key": process.env.REACT_APP_API_KEY,
           },
         }
       );
-
       const responseData = response.data;
       if (responseData.message === "success") {
+        alert("Login successful");
         Cookies.set("email", responseData.email, { expires: 2 });
         Cookies.set("login", true, { expires: 2 });
 
@@ -46,11 +51,20 @@ const Login = () => {
           Cookies.set("role", "User", { expires: 2 });
           window.location.href = `/`;
         }
-      } else if (responseData.message === "invalid") {
+      } else if (responseData.message === "Invalid credentials") {
         alert("INVALID USERNAME OR PASSWORD");
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      if (error.response) {
+        console.log("Error response:", error.response.data); // logs { message: "Invalid credentials" }
+        if (error.response.data.message === "Invalid credentials") {
+          alert("INVALID USERNAME OR PASSWORD");
+        }
+      } else {
+        console.error("Network or unknown error:", error.message);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,22 +79,9 @@ const Login = () => {
         minHeight: "100vh", // Ensures the background covers the entire viewport height
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          paddingTop: "80px",
-        }}
-      >
-        <img
-          src="./assets/logo.png"
-          style={{ width: "70px", height: "auto" }}
-          alt=""
-        />
-      </div>
+      <SideBar />
 
-      <h1 style={{ color: "#fff", marginTop: "20px" }}> Login</h1>
+      <h1 style={{ color: "#fff", marginTop: "20px" }}> {t("login")}</h1>
       <div
         class="row"
         style={{
@@ -102,7 +103,7 @@ const Login = () => {
           <div class="col-lg-3 col-md-6 mx-auto text-left">
             <input
               type="text"
-              placeholder="Username"
+              placeholder={t("username")}
               name="Username"
               required
               style={{
@@ -117,7 +118,7 @@ const Login = () => {
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t("password")}
               name="Password"
               required
               style={{
@@ -147,6 +148,7 @@ const Login = () => {
 
             <button
               type="submit"
+              disabled={loading}
               style={{
                 width: "100%",
                 borderRadius: "30px",
@@ -163,27 +165,58 @@ const Login = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 marginTop: "20px",
+                opacity: loading ? 0.7 : 1,
+                cursor: loading ? "not-allowed" : "pointer",
               }}
             >
-              Login
-              <span
-                style={{
-                  position: "absolute",
-                  width: "99%",
-                  height: "93%",
-                  top: "50%",
-                  left: "50%",
-                  padding: "10px",
-                  paddingTop: "7px",
-                  transform: "translate(-50%, -50%)",
-                  borderRadius: "30px",
-                  zIndex: 10,
-                  background: "#202020",
-                  pointerEvents: "none", // Make sure the span doesn't interfere with button clicks
-                }}
-              >
-                Login
-              </span>
+              {loading ? (
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "24px",
+                    height: "24px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      border: "3px solid #fff",
+                      borderTop: "3px solid #c43b7d",
+                      borderRadius: "50%",
+                      animation: "spin 1s linear infinite",
+                      display: "inline-block",
+                    }}
+                  ></span>
+                  <style>
+                    {`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
+                  </style>
+                </span>
+              ) : (
+                <>
+                  {t("login")}
+                  <span
+                    style={{
+                      position: "absolute",
+                      width: "99%",
+                      height: "93%",
+                      top: "50%",
+                      left: "50%",
+                      padding: "10px",
+                      paddingTop: "7px",
+                      transform: "translate(-50%, -50%)",
+                      borderRadius: "30px",
+                      zIndex: 10,
+                      background: "#202020",
+                      pointerEvents: "none",
+                    }}
+                  >
+                    {t("login")}
+                  </span>
+                </>
+              )}
             </button>
 
             <div style={{ textAlign: "center" }}>
@@ -196,7 +229,7 @@ const Login = () => {
                   textDecoration: "none",
                 }}
               >
-                Create an account
+                {t("create")} {t("an")} {t("account")}
               </a>
             </div>
           </div>

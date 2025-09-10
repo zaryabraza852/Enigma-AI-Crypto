@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import SideBar from "./SideBar";
 import TimeAgo from "./TimeAgo";
 import Cookies from "js-cookie";
+import { useTranslation } from "react-i18next";
 
 const HomeLogin = () => {
+  const { t } = useTranslation();
   const [tableData, settableData] = useState([]);
 
   const [data, setData] = useState([]);
@@ -15,7 +17,7 @@ const HomeLogin = () => {
         method: "GET",
         headers: {
           "api-key": process.env.REACT_APP_API_KEY,
-          "Authorization": `Bearer ${Cookies.get("token")}`
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     )
@@ -70,7 +72,7 @@ const HomeLogin = () => {
       method: "GET",
       headers: {
         "api-key": process.env.REACT_APP_API_KEY,
-        "Authorization": `Bearer ${Cookies.get("token")}`
+        Authorization: `Bearer ${Cookies.get("token")}`,
       },
     })
       .then((response) => {
@@ -138,7 +140,7 @@ const HomeLogin = () => {
                 zIndex: 10,
               }}
             >
-              Introducing ENIGMA: Revolutionizing Trading Al{" "}
+              {t("intro.title")}{" "}
             </span>
           </p>
           <p
@@ -151,11 +153,7 @@ const HomeLogin = () => {
               marginBottom: "0px",
             }}
           >
-            ENIGMA is the future Of trading. Powered by advanced machine
-            learning, it predicts market trends with unmatched accuracy. With
-            lightning- fast decision-making and sophisticated risk management,
-            ENIGMA consistently outperforms, maximizing returns and minimizing
-            risks. Experience the revolution with ENIGMA.
+            {t("intro.description")}
           </p>
         </div>
       </div>
@@ -230,7 +228,7 @@ const HomeLogin = () => {
                           marginLeft: "5px",
                         }}
                       >
-                        Balance
+                        {t("dashboard.balance")}
                       </span>
                     </div>
                     <button
@@ -256,7 +254,7 @@ const HomeLogin = () => {
                         window.location.href = "/Deposite";
                       }}
                     >
-                      Deposit
+                      {t("buttons.deposit")}
                     </button>
                   </div>
                   <div
@@ -347,7 +345,7 @@ const HomeLogin = () => {
                           marginLeft: "5px",
                         }}
                       >
-                        Statistics
+                        {t("dashboard.statistics")}
                       </span>
                     </div>
                     <button
@@ -370,7 +368,7 @@ const HomeLogin = () => {
                         marginTop: "10px",
                       }}
                     >
-                      View Stat
+                      {t("buttons.view_stat")}
                     </button>
                   </div>
                   <div
@@ -443,7 +441,7 @@ const HomeLogin = () => {
                           marginLeft: "5px",
                         }}
                       >
-                        Bot
+                        {t("dashboard.bot")}
                       </span>
                     </div>
                     <button
@@ -470,7 +468,7 @@ const HomeLogin = () => {
                         window.location.href = "/Bot";
                       }}
                     >
-                      Start
+                      {t("buttons.start")}
                     </button>
                   </div>
                   <div
@@ -522,7 +520,7 @@ const HomeLogin = () => {
                 textAlign: "left",
               }}
             >
-              Latest Withdraws{" "}
+              {t("latest_withdrawals.title")}{" "}
             </span>
           </h3>
 
@@ -561,7 +559,7 @@ const HomeLogin = () => {
                       borderRight: "1px solid #47474c",
                     }}
                   >
-                    User
+                    {t("latest_withdrawals.user")}
                   </td>
                   <td
                     style={{
@@ -572,7 +570,7 @@ const HomeLogin = () => {
                       textAlign: "center",
                     }}
                   >
-                    Amount
+                    {t("latest_withdrawals.amount")}
                   </td>
                   <td
                     style={{
@@ -582,7 +580,7 @@ const HomeLogin = () => {
                       textAlign: "center",
                     }}
                   >
-                    Time
+                    {t("latest_withdrawals.time")}
                   </td>
                 </tr>
               </thead>
@@ -633,7 +631,7 @@ const HomeLogin = () => {
                         fontSize: "12px",
                       }}
                     >
-                      1 day ago
+                      {t("daysAgo")}
                       {/* <TimeAgo timestamp={rowData.CreatedAt} /> */}
                     </td>
                   </tr>
