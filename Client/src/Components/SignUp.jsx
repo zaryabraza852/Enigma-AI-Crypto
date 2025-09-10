@@ -5,8 +5,9 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from 'react-i18next';
 
 const SignUp = () => {
-    const {t} = useTranslation();
+  const { t } = useTranslation();
   const [value, setvalue] = useState(null);
+  const [loading, setLoading] = useState(false);
   function onChange(value) {
     console.log("Captcha value:", value);
     setvalue(value);
@@ -19,6 +20,7 @@ const SignUp = () => {
       return;
     }
 
+    setLoading(true);
     const form = e.target;
     const formData = new FormData(form);
     const password = document.getElementById("password").value;
@@ -27,11 +29,13 @@ const SignUp = () => {
     // Password length validation
     if (password.length < 8 || password.length > 10) {
       alert("Password must be between 8 and 10 characters");
+      setLoading(false);
       return;
     }
 
     if (password !== confirmPassword) {
       alert("Password and Confirm Password must match");
+      setLoading(false);
       return;
     }
 
@@ -58,6 +62,8 @@ const SignUp = () => {
       }
     } catch (error) {
       console.error("Error:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -172,6 +178,7 @@ const SignUp = () => {
 
             <button
               type="submit"
+              disabled={loading}
               style={{
                 width: "100%",
                 borderRadius: "30px",
@@ -188,27 +195,58 @@ const SignUp = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 marginTop: "20px",
+                opacity: loading ? 0.7 : 1,
+                cursor: loading ? "not-allowed" : "pointer",
               }}
             >
-              {t("sign_up")}
-              <span
-                style={{
-                  position: "absolute",
-                  width: "99%",
-                  height: "93%",
-                  top: "50%",
-                  left: "50%",
-                  padding: "10px",
-                  paddingTop: "7px",
-                  transform: "translate(-50%, -50%)",
-                  borderRadius: "30px",
-                  zIndex: 10,
-                  background: "#202020",
-                  pointerEvents: "none", // Make sure the span doesn't interfere with button clicks
-                }}
-              >
-               {t("sign_up")}
-              </span>
+              {loading ? (
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "24px",
+                    height: "24px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      border: "3px solid #fff",
+                      borderTop: "3px solid #c43b7d",
+                      borderRadius: "50%",
+                      animation: "spin 1s linear infinite",
+                      display: "inline-block",
+                    }}
+                  ></span>
+                  <style>
+                    {`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
+                  </style>
+                </span>
+              ) : (
+                <>
+                  {t("sign_up")}
+                  <span
+                    style={{
+                      position: "absolute",
+                      width: "99%",
+                      height: "93%",
+                      top: "50%",
+                      left: "50%",
+                      padding: "10px",
+                      paddingTop: "7px",
+                      transform: "translate(-50%, -50%)",
+                      borderRadius: "30px",
+                      zIndex: 10,
+                      background: "#202020",
+                      pointerEvents: "none",
+                    }}
+                  >
+                    {t("sign_up")}
+                  </span>
+                </>
+              )}
             </button>
 
             <div style={{ textAlign: "center" }}>
